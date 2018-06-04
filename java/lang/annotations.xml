@@ -1,0 +1,10 @@
+<root>
+    <item name='java.lang.System'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+    <item name='java.lang.System out'>
+      <annotation name='org.jetbrains.annotations.NonNls'/>
+      <annotation name='java.lang.annotation.Deprecated'/>
+      <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>
