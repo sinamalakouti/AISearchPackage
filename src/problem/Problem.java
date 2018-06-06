@@ -15,4 +15,5 @@ public interface Problem {
     State move(State state, Action action);
     int stepCost(State src, State dest, Action action);
     boolean isGoal(State state);
+    State getInitialState();
 }

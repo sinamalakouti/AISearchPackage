@@ -4,6 +4,7 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
+import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -23,6 +24,7 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
 
         Stack<Node> frontier = new Stack<>();
         ArrayList<State> explored = new ArrayList<>();
+        solution = new Solution();
 
         frontier.push(new Node(start));
         solution.memoryUsage++;
@@ -35,16 +37,20 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
             solution.visitedNodes++;
 
 //            TODO : path cost , best path;
-            if (problem.isGoal(currentNode.getState()))
+            if (problem.isGoal(currentNode.getState())) {
+                solution.setBestPath(currentNode, (Problem1.State) start);
+                solution.cost = currentNode.getPathCost();
                 return solution;
+            }
 
             ArrayList<Action> actions = problem.actionsFor(currentNode.getState());
 
             for (Action action : actions) {
+
+
                 State nexState = problem.move(currentNode.getState(), action);
                 Node nextNode = new Node(nexState, currentNode, action, currentNode.getPathCost() +
                         problem.stepCost(currentNode.getState(), nexState, action), currentNode.getDepth() + 1);
-                frontier.push(nextNode);
 
                 if(! visited(nexState,explored , frontier))
                 frontier.push(nextNode);

@@ -7,4 +7,5 @@ public interface State {
 
     public boolean equals( State s);
     public boolean contains( State s);
+    public String to_String();
 }

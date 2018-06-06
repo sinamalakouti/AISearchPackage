@@ -17,6 +17,10 @@ import java.util.Stack;
  */
 public class DFS_Tree extends SearchAlgorithms implements Agent {
 
+    public DFS_Tree() {
+        solution = new Solution();
+    }
+
     @Override
     public Solution solve(Problem problem, State start) {
 
@@ -43,7 +47,6 @@ public class DFS_Tree extends SearchAlgorithms implements Agent {
                         problem.stepCost(currentNode.getState(), nexState, action), currentNode.getDepth() + 1);
                 frontier.push(nextNode);
 
-                frontier.push(nextNode);
 
             }
 
