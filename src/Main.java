@@ -1,8 +1,13 @@
 import problem.Problem;
 import problem.Problem1;
 import problem.Solution;
+import searchAlgorithms.BFS.BFS_Graph;
 import searchAlgorithms.DFS.DFS_Graph;
 import searchAlgorithms.DFS.DFS_Tree;
+import searchAlgorithms.UCS.UCS_Graph;
+import tree.Node;
+
+import java.util.PriorityQueue;
 
 import static java.lang.System.out;
 
@@ -37,9 +42,19 @@ public class Main {
         y_dest[2]=4;
         y_dest[3]=4;
 
+        PriorityQueue<Node> p = new PriorityQueue<>();
+
+        Node n = new Node(problem.getInitialState());
+        n.setPathCost(-4);
+        p.add(n);
+         Node m  = new Node(problem.getInitialState());
+        m.setPathCost(-1);
+        p.add(m);
+        System.out.println(p.poll().getPathCost());
+        System.out.println(p.poll().getPathCost());
 
         problem.initActions(x_src,y_src,x_dest,y_dest,4);
-        DFS_Graph dfs = new DFS_Graph();
+        BFS_Graph dfs = new BFS_Graph<>();
         Solution sol = dfs.solve(problem,problem.getInitialState());
         System.out.println(sol.toString());
 
@@ -49,6 +64,7 @@ public class Main {
 
 
     }
+// path is :( 0, 0 ) -> ( 1, 0 ) -> ( 2, 0 ) -> ( 3, 0 ) -> ( 3, 1 ) -> ( 4, 1 ) -> ( 4, 2 ) -> ( 4, 3 ) -> ( 4, 4 )
 
 
 

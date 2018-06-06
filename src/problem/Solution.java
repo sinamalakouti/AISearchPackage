@@ -33,7 +33,11 @@ public class Solution {
         for (int i =0 ; i < bestPath.size() ; i++){
 
             counter ++;
-            str += bestPath.get(i).getState().to_String() + " -> ";
+            if ( i != bestPath.size() - 1)
+                str += bestPath.get(i).getState().to_String() + " -> ";
+            else
+                str += bestPath.get(i).getState().to_String() ;
+
         }
         System.out.println(counter);
         return str;

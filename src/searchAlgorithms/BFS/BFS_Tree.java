@@ -4,6 +4,7 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
+import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -37,6 +38,8 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
 
 //   TODO:          solution.cost ++;
             if (problem.isGoal(currentNode.getState())) {
+                solution.setBestPath(currentNode, (Problem1.State) start);
+                solution.cost = currentNode.getPathCost();
                 return solution;
             }
             ArrayList<Action> actions = problem.actionsFor(currentNode.getState());
@@ -46,6 +49,8 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
 
                 State nxtState = problem.move(currentNode.getState(), actions.get(i));
                 if (problem.isGoal(nxtState)) {
+                    solution.setBestPath(currentNode, (Problem1.State) start);
+                    solution.cost = currentNode.getPathCost();
                     return solution;
                 }
 
