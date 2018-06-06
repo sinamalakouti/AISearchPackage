@@ -1,10 +1,11 @@
-package searchAlgorithms;
+package searchAlgorithms.BFS;
 
 import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
 import problem.Solution;
+import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
 
 import java.util.ArrayList;
@@ -13,14 +14,14 @@ import java.util.LinkedList;
 /**
  * Created by sina on 6/6/18.
  */
-public class BFS_Tree<S, A> extends  SearchAlgorithms implements Agent<S, A>  {
-
+public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
 
 
     public Solution solve(Problem problem, State start) {
 
 
         LinkedList<Node> fringe = new LinkedList<Node>();
+        LinkedList<State> explored = new LinkedList<State>();
 
         fringe.addFirst(new Node(start));
 
@@ -31,6 +32,8 @@ public class BFS_Tree<S, A> extends  SearchAlgorithms implements Agent<S, A>  {
 // TODO:            solution.bestPath.addFirst();
             solution.expandedNodes++;
             solution.visitedNodes++;
+            explored.add(currentNode.getState());
+
 
 //   TODO:          solution.cost ++;
             if (problem.isGoal(currentNode.getState())) {
@@ -62,8 +65,26 @@ public class BFS_Tree<S, A> extends  SearchAlgorithms implements Agent<S, A>  {
         return null;
     }
 
+
     @Override
     public A execute(S p) {
         return null;
+    }
+
+
+    private boolean visited(State childState, LinkedList<State> explored, LinkedList<Node> frontier) {
+
+//     todo : contains
+        if (explored.contains(childState))
+            return true;
+        for (Node node : frontier) {
+
+            if (node.getState().equals(childState)) {
+                return true;
+
+            }
+        }
+
+        return false;
     }
 }
