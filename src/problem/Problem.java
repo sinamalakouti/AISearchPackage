@@ -1,6 +1,7 @@
 package problem;
 
-import sun.management.Agent;
+import agents.Action;
+import agents.State;
 
 import java.util.ArrayList;
 
@@ -9,8 +10,9 @@ import java.util.ArrayList;
  */
 
 
-public interface Problem<State, Action> {
+public interface Problem {
     ArrayList<Action> actionsFor(State state);
     State move(State state, Action action);
+    int stepCost(State src, State dest, Action action);
     boolean isGoal(State state);
 }

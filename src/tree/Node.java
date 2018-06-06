@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by sina on 6/4/18.
  */
-public class Node {
+public class Node{
 //  attributes:
 
     private State state;
@@ -28,9 +28,9 @@ public class Node {
     }
 
 //    for root tree
-    public Node(State state, Action action) {
+    public  Node(State state) {
         this.state = state;
-        this.action = action;
+        this.action = null;
         this.parent = null;
         this.pathCost = 0;
         this.depth = 0;

@@ -5,5 +5,5 @@ package agents;
  */
 public interface Agent<Percept, Action> {
 
-    Action perform(Percept p);
+    Action execute(Percept p);
 }

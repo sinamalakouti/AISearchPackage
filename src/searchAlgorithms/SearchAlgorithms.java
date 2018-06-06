@@ -1,20 +1,24 @@
 package searchAlgorithms;
 
+import agents.State;
+import problem.Problem;
+import problem.Solution;
 import tree.Node;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * Created by sina on 6/4/18.
  */
-public class SearchAlgorithms {
+public abstract  class SearchAlgorithms {
 
-//    public static void bfs_treeSearch (Node s, ArrayList<Node> goalNodes ){
-//
-//
-////        Queue<Node>
-//
-//
-//    }
+
+    protected   Solution solution;
+
+    public abstract Solution solve (Problem problem, State start);
+
+
+
 }
