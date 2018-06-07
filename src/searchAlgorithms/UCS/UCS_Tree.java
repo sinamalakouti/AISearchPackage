@@ -24,9 +24,11 @@ public class UCS_Tree extends SearchAlgorithms implements Agent {
         PriorityQueue<Node> frontier = new PriorityQueue<>();
         Node currentnode = new Node(start);
         frontier.add(currentnode);
+        solution.visitedNodes++;
         solution.memoryUsage++;
         while (!frontier.isEmpty()){
             currentnode = frontier.poll();
+            solution.expandedNodes++;
             if (problem.isGoal(currentnode.getState()))
                 return solution;
             ArrayList<Action> actions = new ArrayList<>();
@@ -37,18 +39,24 @@ public class UCS_Tree extends SearchAlgorithms implements Agent {
 
                 if( ! isExist(childState ,frontier)){
                     frontier.add(child);
+                    solution.visitedNodes++;
                 }else {
 
                     Node temp = getNode(childState,frontier);
 
-                    if(child.getPathCost() < temp.getPathCost())
+                    if(child.getPathCost() < temp.getPathCost()) {
                         frontier.add(child);
-                    else
+                        solution.visitedNodes++;
+                    }
+                    else {
                         frontier.add(temp);
-
+                        solution.visitedNodes++;
+                    }
 
                 }
             }
+
+            solution.memoryUsage = Math.max(solution.memoryUsage , frontier.size());
         }
 
 

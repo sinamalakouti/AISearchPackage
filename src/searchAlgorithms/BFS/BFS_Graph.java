@@ -16,9 +16,7 @@ import java.util.LinkedList;
  */
 public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
 
-
     public Solution solve(Problem problem, Problem.State start) {
-
 
         LinkedList<Node> fringe = new LinkedList<Node>();
         LinkedList<State> explored = new LinkedList<State>();
@@ -29,23 +27,19 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
         while (!fringe.isEmpty()) {
 
             Node currentNode = fringe.removeFirst();
-// TODO:            solution.bestPath.addFirst();
             solution.expandedNodes++;
             solution.visitedNodes++;
             explored.add(currentNode.getState());
 
 
-//   TODO:          solution.cost ++;
+
             if (problem.isGoal(currentNode.getState())) {
                 solution.setBestPath(currentNode, (State) start);
-                System.out.println("here");
-                System.out.println(currentNode.getState().to_String());
                 solution.cost = currentNode.getPathCost();
                 return solution;
             }
             ArrayList<Action> actions = problem.actionsFor(currentNode.getState());
             for (int i = 0; i < actions.size(); i++) {
-//               todo path cost
 
 
                 State nxtState = problem.move(currentNode.getState(), actions.get(i));
@@ -54,17 +48,20 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
                             currentNode.getDepth() + 1);
                     solution.setBestPath(nex,  start);
                     solution.cost = nex.getPathCost();
+
                     return solution;
                 }
 
                 Action act = actions.get(i);
-                fringe.addLast(new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
-                        currentNode.getDepth() + 1));
+                Node child =  new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
+                        currentNode.getDepth() + 1);
+                if (!visited(child.getState(),explored,fringe))
+                    fringe.addLast(child);
 
 
             }
 
-            solution.memoryUsage = Math.max(solution.memoryUsage, fringe.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, fringe.size() + explored.size());
 
 
         }

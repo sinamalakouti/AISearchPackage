@@ -22,121 +22,160 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
     ArrayList<State> frontExplored = new ArrayList<>();
     ArrayList<State> backExplored = new ArrayList<>();
 
-    Node startNode ;
+    Node startNode;
     Node finalNode;
 
     @Override
     public Solution solve(Problem problem, Problem.State start) {
 
         Node frontCurrentNode = new Node(start);
-        Node backCurrentNode = new Node(problem.getFinalState());
+        Node backCurrentNode = new Node(problem.getFinalState().get(0));
 
         solution = new Solution();
-
 
 
         srcFrontier.add(frontCurrentNode);
         frontExplored.add(frontCurrentNode.getState());
         destFrontier.add(backCurrentNode);
         backExplored.add(backCurrentNode.getState());
+        solution.visitedNodes++;
+        solution.visitedNodes++;
+        solution.memoryUsage +=2;
 
-        startNode  = frontCurrentNode;
-        finalNode = backCurrentNode;
+
+        startNode = frontCurrentNode;
+        finalNode = new Node(backCurrentNode.getState());
 
 
-        while (!srcFrontier.isEmpty() && ! destFrontier.isEmpty()){
+        while (!srcFrontier.isEmpty() && !destFrontier.isEmpty()) {
 
-            if(!srcFrontier.isEmpty()){
+            if (!srcFrontier.isEmpty()) {
 
                 frontCurrentNode = srcFrontier.remove(0);
-                if(problem.isGoal(frontCurrentNode.getState()) || checker(frontCurrentNode, destFrontier) ){
-                    Node child = getNext(frontCurrentNode,destFrontier);
-//                    child.setParent(frontCurrentNode);
+                solution.expandedNodes++;
+                if (problem.isGoal(frontCurrentNode.getState()) || checker(frontCurrentNode, destFrontier)) {
+                    backCurrentNode = getNext(frontCurrentNode, destFrontier);
+                    Node child = new Node(backCurrentNode);
+
+
+                    Node parent = frontCurrentNode;
+                    Node child1 = new Node(backCurrentNode.getParent());
+                    backCurrentNode.setParent(parent.getParent());
+
+                    int cost = backCurrentNode.getPathCost();
+                    while (child1.getParent() != null) {
+                        Node temp = new Node(child1.getParent());
+                        child1.setParent(backCurrentNode);
+                        backCurrentNode = new Node(child1);
+                        child1 = new Node(temp);
+                        if (child1.getState().equals(finalNode.getState()))
+                            finalNode.setParent(backCurrentNode);
+
+
+                    }
+
                     child.setParent(frontCurrentNode.getParent());
-                    solution.setBestPath(finalNode,  start);
+                    solution.setBestPath(finalNode, start);
                     solution.cost = frontCurrentNode.getPathCost() + child.getPathCost() * -1;
                     return solution;
 
                 }
 
                 ArrayList<Action> U = problem.actionsFor(frontCurrentNode.getState());
-                for (Action u: U) {
-                    State childState = problem.move(frontCurrentNode.getState() , u);
+                for (Action u : U) {
+                    State childState = problem.move(frontCurrentNode.getState(), u);
 
 
-                    Node child = new Node(childState,frontCurrentNode,u,frontCurrentNode.getPathCost() +
-                            problem.stepCost(frontCurrentNode.getState(),childState,u),frontCurrentNode.getDepth() + 1);
-                    if ( ! frontExplored.contains(childState)) {
+                    Node child = new Node(childState, frontCurrentNode, u, frontCurrentNode.getPathCost() +
+                            problem.stepCost(frontCurrentNode.getState(), childState, u), frontCurrentNode.getDepth() + 1);
+                    if (!frontExplored.contains(childState)) {
                         srcFrontier.add(child);
                         frontExplored.add(childState);
                     }
 
 
-
                 }
 
 
             }
 
-            if (!destFrontier.isEmpty()){
+            if (!destFrontier.isEmpty()) {
 
+                Node tempNode = new Node(backCurrentNode.getState(), backCurrentNode.getParent(), backCurrentNode.getAction(), backCurrentNode.getPathCost(), backCurrentNode.getDepth());
+                tempNode.setParent(backCurrentNode.getParent());
                 backCurrentNode = destFrontier.remove(0);
-                if (  start.equals(backCurrentNode.getState()) || checker(backCurrentNode,srcFrontier)){
-                    Node parent = getNext(backCurrentNode,srcFrontier);
+                solution.expandedNodes++;
+
+                if (start.equals(backCurrentNode.getState()) || checker(backCurrentNode, srcFrontier)) {
+
+
+                    Node parent = getNext(backCurrentNode, srcFrontier);
+                    Node child = new Node(backCurrentNode.getParent());
                     backCurrentNode.setParent(parent.getParent());
-                    solution.setBestPath(finalNode,  start);
-                    solution.cost = backCurrentNode.getPathCost() * -1 + parent.getPathCost() ;
-                    return  solution;
+
+                    int cost = backCurrentNode.getPathCost();
+                    while (child.getParent() != null) {
+                        Node temp = new Node(child.getParent());
+                        child.setParent(backCurrentNode);
+                        backCurrentNode = new Node(child);
+                        child = new Node(temp);
+                        if (child.getState().equals(finalNode.getState()))
+                            finalNode.setParent(backCurrentNode);
+
+
+                    }
+
+                    solution.setBestPath(finalNode, start);
+                    solution.cost = cost * -1 + parent.getPathCost();
+                    return solution;
                 }
 
                 ArrayList<Action> U_inv = problem.reverseActionsFor(backCurrentNode.getState());
 
-                for ( Action u_inv : U_inv){
+                for (Action u_inv : U_inv) {
                     State parentState = problem.reverseMove(backCurrentNode.getState(), u_inv);
-                    Node parent = new Node(parentState,null,u_inv,backCurrentNode.getPathCost() -
-                            problem.stepCost(parentState,backCurrentNode.getState(),u_inv), backCurrentNode.getDepth() - 1);
+                    Node parent = new Node(parentState, backCurrentNode, u_inv, backCurrentNode.getPathCost() -
+                            problem.stepCost(parentState, backCurrentNode.getState(), u_inv), backCurrentNode.getDepth() - 1);
 
 
-                    if ( ! backExplored.contains(parentState)) {
+                    if (!backExplored.contains(parentState) && !destFrontier.contains(parent)) {
                         destFrontier.add(parent);
+                        solution.visitedNodes++;
                         backExplored.add(parentState);
-                        backCurrentNode.setParent(parent);
-                        if(backCurrentNode.getState().equals(finalNode.getState()))
+//                        backCurrentNode.setParent(parent);
+
+                        if (backCurrentNode.getState().equals(finalNode.getState())) {
                             finalNode.setParent(parent);
+                        }
                     }
 
 
                 }
 
 
-
             }
 
-
-
-
+            solution.memoryUsage = Math.max(solution.memoryUsage,destFrontier.size() + srcFrontier.size() + frontExplored.size() + backExplored.size());
         }
-        return  null;
+        return null;
     }
 
 
-    public boolean checker(Node node , ArrayList<Node> list){
+    public boolean checker(Node node, ArrayList<Node> list) {
 
-        for (int i =0 ; i< list.size() ; i++)
+        for (int i = 0; i < list.size(); i++)
             if (list.get(i).getState().equals(node.getState()))
                 return true;
         return false;
     }
 
-    public Node getNext( Node node , ArrayList<Node> list) {
+    public Node getNext(Node node, ArrayList<Node> list) {
 
-        for (int i =0 ; i< list.size() ; i++)
+        for (int i = 0; i < list.size(); i++)
             if (list.get(i).getState().equals(node.getState()))
                 return list.get(i);
         return null;
     }
-
-
 
 
     @Override

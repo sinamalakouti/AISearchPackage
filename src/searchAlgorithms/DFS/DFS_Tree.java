@@ -27,13 +27,13 @@ public class DFS_Tree extends SearchAlgorithms implements Agent {
         Stack<Node> frontier = new Stack<>();
 
         frontier.push(new Node(start));
+        solution.visitedNodes++;
         solution.memoryUsage++;
 
         while (!frontier.isEmpty()) {
 
             Node currentNode = frontier.pop();
             solution.expandedNodes++;
-            solution.visitedNodes++;
 
 //            TODO : path cost , best path;
             if (problem.isGoal(currentNode.getState()))
@@ -46,6 +46,7 @@ public class DFS_Tree extends SearchAlgorithms implements Agent {
                 Node nextNode = new Node(nexState, currentNode, action, currentNode.getPathCost() +
                         problem.stepCost(currentNode.getState(), nexState, action), currentNode.getDepth() + 1);
                 frontier.push(nextNode);
+                solution.visitedNodes++;
 
 
             }

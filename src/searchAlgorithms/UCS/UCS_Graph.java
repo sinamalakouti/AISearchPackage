@@ -3,6 +3,7 @@ package searchAlgorithms.UCS;
 import agents.Action;
 import agents.Agent;
 import agents.State;
+import org.omg.CORBA.MARSHAL;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
@@ -30,6 +31,7 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
         solution.memoryUsage++;
         while (!frontier.isEmpty()){
             currentnode = frontier.poll();
+            solution.expandedNodes ++;
             if (problem.isGoal(currentnode.getState())) {
 
                 solution.setBestPath(currentnode, (Problem.State) start);
@@ -43,21 +45,26 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
                         problem.stepCost(currentnode.getState(),childState,action), currentnode.getDepth() + 1);
 
                 if( ! isExist(childState ,frontier, explored)){
-//                    System.out.println("no");
+                    solution.visitedNodes ++;
 
                     frontier.add(child);
                 }else {
 
                     Node temp = getNode(childState,frontier);
 
-                    if(child.getPathCost() < temp.getPathCost())
+                    if(child.getPathCost() < temp.getPathCost()) {
                         frontier.add(child);
-                    else
+                        solution.visitedNodes++;
+                    }
+                    else {
                         frontier.add(temp);
-
+                        solution.visitedNodes++;
+                    }
 
                 }
             }
+
+            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size() + explored.size());
         }
 //
 
@@ -77,14 +84,10 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
         Iterator it = frontier.iterator();
         while (it.hasNext()) {
             if (  ((Node)it.next()).getState().equals(next)  ) {
-//                System.out.println("fukc");
                 return true;
             }
-//            else
-//                System.out.println("yes");
         }
 
-//        System.out.println("lmao");
 
         for (int i =0 ; i< explored.size() ; i ++)
         {

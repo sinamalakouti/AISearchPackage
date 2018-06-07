@@ -50,9 +50,10 @@ public class Astar_Tree extends SearchAlgorithms implements Agent{
                         problem.stepCost(currentNode.getState(),childState,action), currentNode.getDepth() + 1);
                 child.setFn(child.getPathCost() + problem.getHeuristic((Problem.State)currentNode.getState(), (Problem.State)childState));
 
-                if (! isExist(child,frontier))
+                if (! isExist(child,frontier)) {
                     frontier.add(child);
-                    solution.visitedNodes ++;
+                    solution.visitedNodes++;
+                }
 
             }
 

@@ -31,9 +31,8 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
         while (!frontier.isEmpty()) {
 
             Node currentNode = frontier.pop();
-            explored.add(currentNode.getState());
             solution.expandedNodes++;
-            solution.visitedNodes++;
+            explored.add(currentNode.getState());
 
 //            TODO : path cost , best path;
             if (problem.isGoal(currentNode.getState())) {
@@ -51,12 +50,14 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
                 Node nextNode = new Node(nexState, currentNode, action, currentNode.getPathCost() +
                         problem.stepCost(currentNode.getState(), nexState, action), currentNode.getDepth() + 1);
 
-                if(! visited(nexState,explored , frontier))
-                frontier.push(nextNode);
+                if(! visited(nexState,explored , frontier)) {
+                    frontier.push(nextNode);
+                    solution.visitedNodes++;
+                }
 
             }
 
-            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size()+ explored.size());
 
 
         }

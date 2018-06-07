@@ -50,14 +50,15 @@ public class Astar_Graph extends SearchAlgorithms implements Agent {
                         problem.stepCost(currentNode.getState(), childState, action), currentNode.getDepth() + 1);
                 child.setFn(child.getPathCost() + getHeuristic((Problem.State) currentNode.getState(), (Problem.State) childState));
                 if (!explored.contains(childState))
-                    if (!isExist(child, frontier))
+                    if (!isExist(child, frontier)) {
                         frontier.add(child);
-                solution.visitedNodes++;
+                        solution.visitedNodes++;
+                    }
 
             }
 
 
-            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size() + explored.size());
 
         }
 

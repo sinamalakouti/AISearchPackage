@@ -54,8 +54,9 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
                 }
 
                 Action act = actions.get(i);
-                fringe.addLast(new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
-                        currentNode.getDepth() + 1));
+               Node child =  new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
+                        currentNode.getDepth() + 1);
+                fringe.addLast(child);
                 solution.visitedNodes++;
 
             }

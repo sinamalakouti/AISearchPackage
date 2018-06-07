@@ -30,6 +30,16 @@ public class Node implements Comparable{
         this.fn = this.pathCost;
     }
 
+    public Node(Node node) {
+
+        this.state = node.getState();
+
+        this.parent = node.getParent();
+        this.action = node.action;
+        this.pathCost = node.getPathCost();
+        this.depth = node.getDepth();
+        this.fn = node.getFn();
+    }
 
     //    for root tree
     public  Node(State state) {

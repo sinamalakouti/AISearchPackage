@@ -48,6 +48,8 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
     public Object recursiveDLS (Node node, Problem problem, int limit){
 
         solution.expandedNodes ++;
+        solution.visitedNodes++;
+        solution.memoryUsage = Math.max(solution.memoryUsage,visited.size());
         if(!visited.contains(node.getState()))
             visited.add(node.getState());
         if (problem.isGoal(node.getState())) {
@@ -64,7 +66,8 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
 
 
                 State nextState = problem.move(node.getState(), action);
-                Node child  = new Node(nextState,node,action, node.getPathCost() + problem.stepCost(node.getState(),nextState,action), node.getDepth() + 1);
+                Node child  = new Node(nextState,node,action, node.getPathCost() +
+                        problem.stepCost(node.getState(),nextState,action), node.getDepth() + 1);
 
                 if (visited(child.getState(),visited) == false) {
                     visited.add(child.getState());

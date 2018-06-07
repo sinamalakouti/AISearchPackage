@@ -29,7 +29,7 @@ public class IDS_Tree extends SearchAlgorithms implements Agent {
             Object res =  dls.recursiveDLS(currentNode,problem,i);
             if(res == null)
                 return  null;
-            else if ( res.getClass().isInstance(String.class) && ((String )res).compareTo("cutOff") == 0)
+            else if ( res.getClass().equals(String.class) && ((String )res).compareTo("cutOff") == 0)
                 continue;
             else
                 return (Solution) res;

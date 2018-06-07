@@ -5,7 +5,10 @@ package agents;
  */
 public interface State {
 
-    public boolean equals( State s);
+    @Override
+    public boolean equals(Object o);
+
     public boolean contains( State s);
+
     public String to_String();
 }

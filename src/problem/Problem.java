@@ -19,10 +19,12 @@ public interface Problem {
     int stepCost(agents.State src, agents.State dest, Action action);
     boolean isGoal(agents.State state);
     agents.State getInitialState();
-    agents.State getFinalState();
+    ArrayList<agents.State> getFinalState();
 
-    public String parseAction(State src , State dest);
+    public  String parseAction(State src , State dest);
     public int getHeuristic( State source , State dest);
+
+
 
 
     public abstract class State implements agents.State{

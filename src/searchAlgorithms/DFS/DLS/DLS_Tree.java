@@ -32,47 +32,58 @@ public class DLS_Tree extends SearchAlgorithms implements Agent {
         solution.memoryUsage++;
         Object res = recursiveDLS(frontier.pop(), problem, limit);
 
-        if (res != null && ! res.getClass().isInstance(String.class))
-            return  (Solution) res;
-        else return  null;
+        if (res != null && !res.getClass().isInstance(String.class))
+            return (Solution) res;
+        else return null;
 
     }
 
 
-    public Object recursiveDLS (Node node, Problem problem, int limit){
+    public Object recursiveDLS(Node node, Problem problem, int limit) {
 
 
-        if (problem.isGoal(node.getState()))
+        solution.expandedNodes++;
+        solution.visitedNodes++;
+        
+
+        if (problem.isGoal(node.getState())) {
+            solution.setBestPath(node, (Problem.State) problem.getInitialState());
+            solution.cost = node.getPathCost();
             return solution;
+        }
 //        cutt off occured
-        else  if (limit == 0 )return "cutOff";
+        else if (limit == 0) return "cutOff";
         else {
 
             boolean cutOffOccured = false;
-            for (Action action: problem.actionsFor(node.getState())) {
+            for (Action action : problem.actionsFor(node.getState())) {
+
+
                 State nextState = problem.move(node.getState(), action);
-                Node child  = new Node(nextState,node,action, node.getPathCost() + problem.stepCost(node.getState(),nextState,action), node.getDepth() + 1);
-                Object result = recursiveDLS(child, problem, limit - 1);
-                if (result != null && Objects.class.isInstance(String.class)) {
-                    if (((String) result).compareTo("cutOff") == 0)
-                        cutOffOccured = true;
-                }
-                else if (result != null )
-                    return result;
+                Node child = new Node(nextState, node, action, node.getPathCost() + problem.stepCost(node.getState(), nextState, action), node.getDepth() + 1);
+
+//                if (visited(child.getState(), visited) == false) {
+//                    visited.add(child.getState());
+                    Object result = recursiveDLS(child, problem, limit - 1);
 
 
+                    if (result != null && result.getClass().equals(String.class)) {
+                        if (((String) result).compareTo("cutOff") == 0)
+                            cutOffOccured = true;
+                    } else if (result != null)
+                        return result;
+//                }
 
-        }
+
+            }
 
             if (cutOffOccured == true)
                 return "cutOff";
             else return null;
 
 
-
         }
     }
-
 
 
     @Override

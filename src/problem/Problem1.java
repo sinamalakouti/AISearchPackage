@@ -4,6 +4,7 @@ import agents.Action;
 import agents.State;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by sina on 6/6/18.
@@ -234,8 +235,11 @@ public class Problem1 implements Problem {
     }
 
     @Override
-    public Problem.State getFinalState() {
-        return states[states.length - 1][states[0].length-1];
+    public ArrayList<agents.State> getFinalState() {
+
+        ArrayList <agents.State> arrayList = new ArrayList<>();
+        arrayList.add( states[states.length - 1][states[0].length-1]);
+        return arrayList;
     }
 
     @Override
@@ -282,8 +286,8 @@ public class Problem1 implements Problem {
         }
 
         @Override
-        public boolean equals(agents.State s) {
-
+        public boolean equals(Object s) {
+            s = (agents.State)s;
             if (this.row == ((State) s).row && this.col == ((State) s).col)
                 return true;
             return false;

@@ -1,8 +1,10 @@
 package problem;
 
+import agents.Action;
 import agents.State;
 import tree.Node;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -16,6 +18,7 @@ public class Solution {
     public LinkedList<Node> bestPath;
     public int cost;
     public double memoryUsage;
+    public Problem problem ;
 
     public Solution() {
         visitedNodes = 0;
@@ -27,7 +30,11 @@ public class Solution {
 
     @Override
     public String toString() {
-        return to_String2();
+        if (problem.getClass().equals(Problem1.class))
+            return to_String1();
+        else
+            return to_String2();
+
 
     }
 
@@ -56,22 +63,28 @@ public class Solution {
 
         String str = "";
         str = "visited Nodes :" + visitedNodes + "\n expanded nodes : "+ expandedNodes +"\n cost : "+ cost + "\nmemory usage : " + memoryUsage+" \n path is :\n" ;
+        String result = "";
         int counter = 0 ;
         for (int i =0 ; i < bestPath.size() ; i++){
 
             counter ++;
-            if ( i != bestPath.size() - 1)
+            if ( i != bestPath.size() - 1) {
                 str += bestPath.get(i).getState().to_String() + " \n" + "\n";
-            else
-                str += bestPath.get(i).getState().to_String() ;
+                    result+= problem.parseAction((Problem.State)bestPath.get(i).getState(),(Problem.State)bestPath.get(i+1).getState()) + " \t";
+            }
+            else {
+                str += bestPath.get(i).getState().to_String();
+            }
 
         }
         System.out.println(counter);
-        return str;
+        return (str + "\nactions are :\t"+ result);
 
 
 
     }
+
+
     public void setBestPath(Node goal, State start){
         Node currentNode = goal;
         Node parent = goal.getParent();

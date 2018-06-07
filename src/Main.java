@@ -1,7 +1,4 @@
-import problem.Problem;
-import problem.Problem1;
-import problem.Problem2;
-import problem.Solution;
+import problem.*;
 import searchAlgorithms.BFS.BFS_Graph;
 import searchAlgorithms.DFS.DFS_Graph;
 import searchAlgorithms.DFS.DFS_Tree;
@@ -11,10 +8,12 @@ import searchAlgorithms.UCS.UCS_Graph;
 import searchAlgorithms.astar.Astar_Graph;
 import searchAlgorithms.astar.Astar_Tree;
 import searchAlgorithms.bidirectional.Bidirectional_Graph;
+import searchAlgorithms.bidirectional.Bidirectional_Tree;
 import tree.Node;
 
 import java.util.PriorityQueue;
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class Main {
@@ -60,9 +59,10 @@ public class Main {
         System.out.println(p.poll().getPathCost());
 
         problem.initActions(x_src,y_src,x_dest,y_dest,4);
-        Astar_Graph dfs = new Astar_Graph();
-//        Solution sol = dfs.solve(problem,problem.getInitialState());
-//        System.out.println(sol.toString());
+        Bidirectional_Tree dfs = new Bidirectional_Tree();
+        Solution sol = dfs.solve(problem,problem.getInitialState());
+        sol.problem = problem;
+        System.out.println(sol.toString());
 
 
 // Probelm 2 :
@@ -71,27 +71,68 @@ public class Main {
         Problem2 problem2 = new Problem2();
 
         int [] board = {1,4,2,7,0,5,3,6,8};
+//        int [] board2 = {0,1,2,3,4,5,6,7,8};
 
         problem2.setInitialState( board);
-        UCS_Graph ucs = new UCS_Graph();
+        Bidirectional_Graph ucs = new Bidirectional_Graph();
+
         Solution sol2 = ucs.solve(problem2, (Problem.State) problem2.getInitialState());
 
+            sol2.problem = problem2;
+//        System.out.println(sol2.toString());
 
-        int [] board2 = {0,1,2,3,4,5,6,7,8};
-        Problem2.State state = problem2.createState(board);
-        System.out.println(state.equals(problem2.getFinalState()));
-        System.out.println(sol2.toString());
 
+//        problem 3 :
+        Problem3 problem3 = new Problem3();
+        char [] input = {'y','b','y','b','g','y','g','y','w','g','w','g','b','w','b','w','r','r','r','r','o','o','o','o'};
+        int [] board3 = new int[input.length];
+        for (int i =0 ; i < input.length ; i++)
+            board3[i] = problem3.parseInput(input[i]);
+        problem3.createInitialState(board3);
+
+//        BFS_Graph ucs = new BFS_Graph();
+//        Solution sol2 = ucs.solve(problem3, (Problem.State) problem3.getInitialState());
+
+        sol2.toString();
 
 
 
     }
 // path is :( 0, 0 ) -> ( 1, 0 ) -> ( 2, 0 ) -> ( 3, 0 ) -> ( 3, 1 ) -> ( 4, 1 ) -> ( 4, 2 ) -> ( 4, 3 ) -> ( 4, 4 )
+//    1 4 2
+//            7 0 5
+//            3 6 8
+//
+//            1 4 2
+//            0 7 5
+//            3 6 8
+//
+//            1 4 2
+//            3 7 5
+//            0 6 8
+//
+//            1 4 2
+//            3 7 5
+//            6 0 8
+//
+//            1 4 2
+//            3 0 5
+//            6 7 8
+//
+//            1 0 2
+//            3 4 5
+//            6 7 8
+//
+//            0 1 2
+//            3 4 5
+//            6 7 8
 
 
 
 
-public void check (){
+
+
+    public void check (){
 
 
     int [] board = {0,1,2,3,4,5,6,7,8};
