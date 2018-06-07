@@ -25,7 +25,7 @@ public class DLS_Tree extends SearchAlgorithms implements Agent {
 
     @Override
 
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
         Stack<Node> frontier = new Stack<>();
 
         frontier.push(new Node(start));

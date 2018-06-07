@@ -18,7 +18,7 @@ import java.util.LinkedList;
 public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
 
 
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
 
         LinkedList<Node> fringe = new LinkedList<Node>();

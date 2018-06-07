@@ -17,7 +17,7 @@ public abstract  class SearchAlgorithms {
 
     protected   Solution solution;
 
-    public abstract Solution solve (Problem problem, State start);
+    public abstract Solution solve (Problem problem, Problem.State start);
 
     public Solution getSolution() {
         return solution;

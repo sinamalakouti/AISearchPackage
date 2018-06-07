@@ -20,7 +20,7 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
         PriorityQueue<Node> frontier = new PriorityQueue<Node>();
         ArrayList<State> explored = new ArrayList<>();

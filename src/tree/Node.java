@@ -17,6 +17,7 @@ public class Node implements Comparable{
     private Action action;
     private  int pathCost;
     private  int depth;
+    private int fn ;
 
 //    constructors:
 
@@ -26,15 +27,20 @@ public class Node implements Comparable{
         this.action = action;
         this.pathCost = pathCost;
         this.depth = depth;
+        this.fn = this.pathCost;
     }
 
-//    for root tree
+
+    //    for root tree
     public  Node(State state) {
         this.state = state;
         this.action = null;
         this.parent = null;
         this.pathCost = 0;
+
         this.depth = 0;
+        this.fn = this.pathCost;
+
     }
 
 //    helper methods
@@ -42,6 +48,14 @@ public class Node implements Comparable{
 
         return state;
     }
+    public int getFn() {
+        return fn;
+    }
+
+    public void setFn(int fn) {
+        this.fn = fn;
+    }
+
 
     public void setState(State state) {
         this.state = state;
@@ -69,6 +83,7 @@ public class Node implements Comparable{
 
     public void setPathCost(int pathCost) {
         this.pathCost = pathCost;
+        this.fn = pathCost;
     }
 
     public int getDepth() {
@@ -120,7 +135,7 @@ public class Node implements Comparable{
     @Override
     public int compareTo(Object o) {
         o = ((Node) o);
-        if(this.getPathCost() >= ((Node) o).getPathCost() )
+        if(this.getFn() >= ((Node) o).getFn() )
             return 1;
         else return -1;
 

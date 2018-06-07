@@ -27,7 +27,7 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
     Node finalNode;
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
         Node frontCurrentNode = new Node(start);
         Node backCurrentNode = new Node(problem.getFinalState());

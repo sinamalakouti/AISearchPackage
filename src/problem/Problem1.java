@@ -1,6 +1,7 @@
 package problem;
 
 import agents.Action;
+import agents.State;
 
 import java.util.ArrayList;
 
@@ -115,7 +116,34 @@ public class Problem1 implements Problem {
     }
 
     @Override
-    public agents.State move(agents.State state, agents.Action action) {
+    public ArrayList<agents.Action> reverseActionsFor(agents.State state) {
+
+        ArrayList<agents.Action> result = new ArrayList<>();
+
+        for (int row = 0 ; row < states.length ; row ++){
+
+            for (int col = 0 ; col < states[0].length ; col ++){
+
+                State s = states[row][col];
+                for (agents.Action action : s.actions){
+
+                    if ( state.equals(move(s,action)))
+                        result.add(action);
+                }
+
+
+
+
+            }
+
+        }
+
+        return result;
+
+    }
+
+    @Override
+    public Problem.State move(agents.State state, agents.Action action) {
 
         State src = ((State) state);
         int a = ((Action) action).getMove();
@@ -135,6 +163,9 @@ public class Problem1 implements Problem {
         }
         return null;
     }
+
+
+
     public State move(agents.State state, int action) {
 
         State src = ((State) state);
@@ -151,6 +182,29 @@ public class Problem1 implements Problem {
         }
         return null;
     }
+
+
+
+
+
+
+    @Override
+    public Problem.State reverseMove(agents.State state, agents.Action action) {
+
+        for (int row = 0 ; row < states.length ; row ++)
+            for (int col =0 ; col < states[0].length ; col ++)
+            {
+                State s = states[row][col];
+
+                agents.State tmpState  = move(s,action);
+
+                if (tmpState != null && tmpState.equals(state))
+                    return  s;
+
+            }
+        return  null;
+    }
+
     @Override
     public int stepCost(agents.State src, agents.State dest, agents.Action action) {
         return 1;
@@ -158,7 +212,6 @@ public class Problem1 implements Problem {
 
     @Override
     public boolean isGoal(agents.State state) {
-
 
         if (((State) state).row == states.length - 1 && ((State) state).col == states[0].length - 1)
             return  true;
@@ -171,10 +224,14 @@ public class Problem1 implements Problem {
         return states[0][0];
     }
 
-    public class State implements agents.State {
+    @Override
+    public Problem.State getFinalState() {
+        return states[states.length - 1][states[0].length-1];
+    }
 
-            int row ,col;
-            ArrayList<agents.Action> actions = new ArrayList<>();
+    public class State extends Problem.State {
+
+
         public State(int row , int col ) {
             this.row = row;
             this.col = col;
@@ -184,6 +241,22 @@ public class Problem1 implements Problem {
         public void insertAction( int action){
             if(!actions.contains(action))
                 actions.add(new Action(action));
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getCol() {
+            return col;
+        }
+
+        public void setCol(int col) {
+            this.col = col;
         }
 
         @Override

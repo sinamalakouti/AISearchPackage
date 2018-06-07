@@ -20,7 +20,7 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
         Stack<Node> frontier = new Stack<>();
         ArrayList<State> explored = new ArrayList<>();

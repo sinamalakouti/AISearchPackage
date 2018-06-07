@@ -30,7 +30,7 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
         Stack<Node> frontier = new Stack<>();
         solution = new Solution();
         frontier.push(new Node(start));

@@ -20,7 +20,7 @@ public class Bidirectional_Tree extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
         Node frontCurrentNode = new Node(start);
         Node backCurrentNode = new Node(problem.getFinalState());

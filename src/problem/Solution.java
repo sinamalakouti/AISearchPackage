@@ -1,5 +1,6 @@
 package problem;
 
+import agents.State;
 import tree.Node;
 
 import java.util.LinkedList;
@@ -43,7 +44,7 @@ public class Solution {
         return str;
     }
 
-    public void setBestPath(Node goal, Problem1.State start){
+    public void setBestPath(Node goal, State start){
         Node currentNode = goal;
         Node parent = goal.getParent();
         Stack<Node> path = new Stack<>();

@@ -18,7 +18,7 @@ public class IDS_Tree extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
         solution = new Solution();
         Node currentNode = new Node(start);
 

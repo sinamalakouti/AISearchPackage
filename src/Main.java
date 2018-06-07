@@ -6,6 +6,8 @@ import searchAlgorithms.DFS.DFS_Graph;
 import searchAlgorithms.DFS.DFS_Tree;
 import searchAlgorithms.DFS.IDS.IDS_Graph;
 import searchAlgorithms.UCS.UCS_Graph;
+import searchAlgorithms.astar.Astar_Graph;
+import searchAlgorithms.astar.Astar_Tree;
 import searchAlgorithms.bidirectional.Bidirectional_Graph;
 import tree.Node;
 
@@ -56,7 +58,7 @@ public class Main {
         System.out.println(p.poll().getPathCost());
 
         problem.initActions(x_src,y_src,x_dest,y_dest,4);
-        Bidirectional_Graph dfs = new Bidirectional_Graph();
+        Astar_Graph dfs = new Astar_Graph();
         Solution sol = dfs.solve(problem,problem.getInitialState());
         System.out.println(sol.toString());
 

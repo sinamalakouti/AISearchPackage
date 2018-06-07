@@ -19,7 +19,7 @@ public class UCS_Tree extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
 
         PriorityQueue<Node> frontier = new PriorityQueue<>();
         Node currentnode = new Node(start);

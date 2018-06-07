@@ -19,7 +19,7 @@ public class IDS_Graph extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, State start) {
+    public Solution solve(Problem problem, Problem.State start) {
         Node currentNode = new Node(start);
         solution = new Solution();
 
