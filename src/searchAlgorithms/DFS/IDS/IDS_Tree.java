@@ -19,12 +19,13 @@ public class IDS_Tree extends SearchAlgorithms implements Agent {
 
     @Override
     public Solution solve(Problem problem, State start) {
-
+        solution = new Solution();
         Node currentNode = new Node(start);
 
         for (int i = 1 ; i <= maxLimitDepth ; i ++)
         {
             DLS_Tree dls = new DLS_Tree(i);
+            dls.setSolution(solution);
             Object res =  dls.recursiveDLS(currentNode,problem,i);
             if(res == null)
                 return  null;

@@ -4,11 +4,8 @@
     <list default="true" id="bb83eb45-20fb-4899-abe4-a2d2a63256b9" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/searchAlgorithms/astar/Astar_Graph.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/searchAlgorithms/astar/Astar_Tree.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/searchAlgorithms/bidirectional/Bidirectional_Graph.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/searchAlgorithms/bidirectional/Bidirectional_Tree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AISearchPackage/Main.class" afterPath="$PROJECT_DIR$/out/production/AISearchPackage/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/problem/Problem.java" afterPath="$PROJECT_DIR$/src/problem/Problem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/problem/Problem1.java" afterPath="$PROJECT_DIR$/src/problem/Problem1.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/problem/Solution.java" afterPath="$PROJECT_DIR$/src/problem/Solution.java" />
@@ -16,7 +13,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/searchAlgorithms/DFS/DLS/DLS_Grpah.java" afterPath="$PROJECT_DIR$/src/searchAlgorithms/DFS/DLS/DLS_Grpah.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/searchAlgorithms/DFS/IDS/IDS_Graph.java" afterPath="$PROJECT_DIR$/src/searchAlgorithms/DFS/IDS/IDS_Graph.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/searchAlgorithms/DFS/IDS/IDS_Tree.java" afterPath="$PROJECT_DIR$/src/searchAlgorithms/DFS/IDS/IDS_Tree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/searchAlgorithms/SearchAlgorithms.java" afterPath="$PROJECT_DIR$/src/searchAlgorithms/SearchAlgorithms.java" />
     </list>
     <ignored path="AISearchPackage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -751,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528313550391</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="adding Bidirectional algorithms&#10;">
+      <created>1528371571434</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1528371571434</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -807,7 +810,8 @@
     <MESSAGE value="adding UCS" />
     <MESSAGE value="debugging dfs and adding problem1" />
     <MESSAGE value="Debug UCS and BFS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debug UCS and BFS" />
+    <MESSAGE value="adding Bidirectional algorithms&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding Bidirectional algorithms&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -4,6 +4,7 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
+import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -31,7 +32,7 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
     @Override
     public Solution solve(Problem problem, State start) {
         Stack<Node> frontier = new Stack<>();
-
+        solution = new Solution();
         frontier.push(new Node(start));
 
         solution.memoryUsage++;
@@ -47,22 +48,31 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
 
     public Object recursiveDLS (Node node, Problem problem, int limit){
 
-
-        if (problem.isGoal(node.getState()))
+        solution.expandedNodes ++;
+        if(!visited.contains(node.getState()))
+            visited.add(node.getState());
+        if (problem.isGoal(node.getState())) {
+            solution.setBestPath(node, (Problem1.State) problem.getInitialState());
+            solution.cost = node.getPathCost();
             return solution;
+        }
 //        cutt off occured
         else  if (limit == 0 )return "cutOff";
         else {
 
             boolean cutOffOccured = false;
             for (Action action: problem.actionsFor(node.getState())) {
+
+
                 State nextState = problem.move(node.getState(), action);
                 Node child  = new Node(nextState,node,action, node.getPathCost() + problem.stepCost(node.getState(),nextState,action), node.getDepth() + 1);
+
                 if (visited(child.getState(),visited) == false) {
                     visited.add(child.getState());
                     Object result = recursiveDLS(child, problem, limit - 1);
 
-                    if (result != null && Objects.class.isInstance(String.class)) {
+
+                    if (result != null && result.getClass().equals(String.class)) {
                         if (((String) result).compareTo("cutOff") == 0)
                             cutOffOccured = true;
                     } else if (result != null)

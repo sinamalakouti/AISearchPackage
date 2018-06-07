@@ -53,7 +53,7 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
                 if (problem.isGoal(nxtState)) {
                    Node nex =  new Node(nxtState, currentNode, actions.get(i), currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, actions.get(i)),
                             currentNode.getDepth() + 1);
-                    solution.setBestPath(nex, (Problem1.State) start);
+                    solution.setBestPath(nex,  start);
                     solution.cost = nex.getPathCost();
                     return solution;
                 }
