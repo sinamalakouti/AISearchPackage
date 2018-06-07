@@ -19,6 +19,11 @@ public abstract  class SearchAlgorithms {
 
     public abstract Solution solve (Problem problem, State start);
 
+    public Solution getSolution() {
+        return solution;
+    }
 
-
+    public void setSolution(Solution solution) {
+        this.solution = solution;
+    }
 }
