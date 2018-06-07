@@ -4,7 +4,6 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
-import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;

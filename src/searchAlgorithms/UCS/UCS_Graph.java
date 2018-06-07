@@ -4,7 +4,6 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
-import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -33,7 +32,7 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
             currentnode = frontier.poll();
             if (problem.isGoal(currentnode.getState())) {
 
-                solution.setBestPath(currentnode, (Problem1.State) start);
+                solution.setBestPath(currentnode, (Problem.State) start);
                 solution.cost = currentnode.getPathCost();
                 return solution;
             }
@@ -44,7 +43,7 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
                         problem.stepCost(currentnode.getState(),childState,action), currentnode.getDepth() + 1);
 
                 if( ! isExist(childState ,frontier, explored)){
-                    System.out.println("no");
+//                    System.out.println("no");
 
                     frontier.add(child);
                 }else {
@@ -78,14 +77,14 @@ public class UCS_Graph extends SearchAlgorithms implements Agent {
         Iterator it = frontier.iterator();
         while (it.hasNext()) {
             if (  ((Node)it.next()).getState().equals(next)  ) {
-                System.out.println("fukc");
+//                System.out.println("fukc");
                 return true;
             }
-            else
-                System.out.println("yes");
+//            else
+//                System.out.println("yes");
         }
 
-        System.out.println("lmao");
+//        System.out.println("lmao");
 
         for (int i =0 ; i< explored.size() ; i ++)
         {

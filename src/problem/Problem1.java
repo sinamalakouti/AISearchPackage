@@ -183,6 +183,15 @@ public class Problem1 implements Problem {
         return null;
     }
 
+    @Override
+    public int getHeuristic(Problem.State source, Problem.State dest ){
+
+        double distance = Math.pow(source.getRow() - dest.getRow(), 2)  +  Math.pow(source.getCol() - dest.getCol(),2);
+
+
+        return (int) Math.floor(Math.sqrt(distance));
+
+    }
 
 
 
@@ -227,6 +236,19 @@ public class Problem1 implements Problem {
     @Override
     public Problem.State getFinalState() {
         return states[states.length - 1][states[0].length-1];
+    }
+
+    @Override
+    public String parseAction(Problem.State src, Problem.State dest) {
+        // 0 -> up, 1-> down, 2 -> right ,    3 -> left
+
+        if ( src.getRow() > dest.getRow() )
+            return "U";
+        else if (src.getRow() < dest.getRow())
+            return "D";
+        else if (src.getCol() > dest.getCol())
+            return "L";
+        else return "R";
     }
 
     public class State extends Problem.State {

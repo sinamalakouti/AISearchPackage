@@ -48,7 +48,7 @@ public class Astar_Tree extends SearchAlgorithms implements Agent{
                 State childState = problem.move(currentNode.getState(),action);
                 Node  child = new Node(childState,currentNode,action,currentNode.getPathCost() +
                         problem.stepCost(currentNode.getState(),childState,action), currentNode.getDepth() + 1);
-                child.setFn(child.getPathCost() + getHeuristic((Problem.State)currentNode.getState(), (Problem.State)childState));
+                child.setFn(child.getPathCost() + problem.getHeuristic((Problem.State)currentNode.getState(), (Problem.State)childState));
 
                 if (! isExist(child,frontier))
                     frontier.add(child);
@@ -89,14 +89,6 @@ public class Astar_Tree extends SearchAlgorithms implements Agent{
 
         }
         return  false;
-
-    }
-    public int getHeuristic(Problem.State source, Problem.State dest ){
-
-        double distance = Math.pow(source.getRow() - dest.getRow(), 2)  +  Math.pow(source.getCol() - dest.getCol(),2);
-
-
-        return (int) Math.floor(Math.sqrt(distance));
 
     }
 

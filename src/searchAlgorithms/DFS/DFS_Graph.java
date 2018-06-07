@@ -4,7 +4,6 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
-import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -38,7 +37,7 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
 
 //            TODO : path cost , best path;
             if (problem.isGoal(currentNode.getState())) {
-                solution.setBestPath(currentNode, (Problem1.State) start);
+                solution.setBestPath(currentNode, (Problem.State) start);
                 solution.cost = currentNode.getPathCost();
                 return solution;
             }

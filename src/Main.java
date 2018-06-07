@@ -1,9 +1,11 @@
 import problem.Problem;
 import problem.Problem1;
+import problem.Problem2;
 import problem.Solution;
 import searchAlgorithms.BFS.BFS_Graph;
 import searchAlgorithms.DFS.DFS_Graph;
 import searchAlgorithms.DFS.DFS_Tree;
+import searchAlgorithms.DFS.DLS.DLS_Grpah;
 import searchAlgorithms.DFS.IDS.IDS_Graph;
 import searchAlgorithms.UCS.UCS_Graph;
 import searchAlgorithms.astar.Astar_Graph;
@@ -59,10 +61,26 @@ public class Main {
 
         problem.initActions(x_src,y_src,x_dest,y_dest,4);
         Astar_Graph dfs = new Astar_Graph();
-        Solution sol = dfs.solve(problem,problem.getInitialState());
-        System.out.println(sol.toString());
+//        Solution sol = dfs.solve(problem,problem.getInitialState());
+//        System.out.println(sol.toString());
 
 
+// Probelm 2 :
+
+
+        Problem2 problem2 = new Problem2();
+
+        int [] board = {1,4,2,7,0,5,3,6,8};
+
+        problem2.setInitialState( board);
+        UCS_Graph ucs = new UCS_Graph();
+        Solution sol2 = ucs.solve(problem2, (Problem.State) problem2.getInitialState());
+
+
+        int [] board2 = {0,1,2,3,4,5,6,7,8};
+        Problem2.State state = problem2.createState(board);
+        System.out.println(state.equals(problem2.getFinalState()));
+        System.out.println(sol2.toString());
 
 
 
@@ -73,6 +91,11 @@ public class Main {
 
 
 
+public void check (){
 
+
+    int [] board = {0,1,2,3,4,5,6,7,8};
+
+}
 
 }

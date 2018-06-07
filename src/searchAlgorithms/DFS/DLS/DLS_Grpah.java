@@ -4,7 +4,6 @@ import agents.Action;
 import agents.Agent;
 import agents.State;
 import problem.Problem;
-import problem.Problem1;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
@@ -39,7 +38,7 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
         visited.add(frontier.peek().getState());
         Object res = recursiveDLS(frontier.pop(), problem, limit);
 
-        if (res != null && ! res.getClass().isInstance(String.class))
+        if (res != null && ! res.getClass().equals(String.class))
             return  (Solution) res;
         else return  null;
 
@@ -52,7 +51,7 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
         if(!visited.contains(node.getState()))
             visited.add(node.getState());
         if (problem.isGoal(node.getState())) {
-            solution.setBestPath(node, (Problem1.State) problem.getInitialState());
+            solution.setBestPath(node, (Problem.State) problem.getInitialState());
             solution.cost = node.getPathCost();
             return solution;
         }

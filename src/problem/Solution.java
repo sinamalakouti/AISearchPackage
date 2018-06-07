@@ -27,6 +27,13 @@ public class Solution {
 
     @Override
     public String toString() {
+        return to_String2();
+
+    }
+
+
+    public String to_String1(){
+
         String str = "";
         str = "visited Nodes :" + visitedNodes + "\n expanded nodes : "+ expandedNodes +"\n cost : "+ cost + "\nmemory usage : " + memoryUsage+" \n path is :" ;
 
@@ -42,8 +49,29 @@ public class Solution {
         }
         System.out.println(counter);
         return str;
+
     }
 
+    private String to_String2(){
+
+        String str = "";
+        str = "visited Nodes :" + visitedNodes + "\n expanded nodes : "+ expandedNodes +"\n cost : "+ cost + "\nmemory usage : " + memoryUsage+" \n path is :\n" ;
+        int counter = 0 ;
+        for (int i =0 ; i < bestPath.size() ; i++){
+
+            counter ++;
+            if ( i != bestPath.size() - 1)
+                str += bestPath.get(i).getState().to_String() + " \n" + "\n";
+            else
+                str += bestPath.get(i).getState().to_String() ;
+
+        }
+        System.out.println(counter);
+        return str;
+
+
+
+    }
     public void setBestPath(Node goal, State start){
         Node currentNode = goal;
         Node parent = goal.getParent();
