@@ -1,8 +1,5 @@
 package problem;
 
-import agents.Action;
-import agents.State;
-
 import java.util.ArrayList;
 
 /**
@@ -29,10 +26,10 @@ public class Problem2 implements Problem {
         int[] board = ((State) state).getBoard();
         int blankPosition = 0;
         while (board[blankPosition] != 0) blankPosition++;
-        if (blankPosition > 2) legalActions.add(new Action(UP));
         if (blankPosition % 3 != 0) legalActions.add(new Action(LEFT));
         if (blankPosition % 3 != 2) legalActions.add(new Action(RIGHT));
         if (blankPosition < 6) legalActions.add(new Action(DOWN));
+        if (blankPosition > 2) legalActions.add(new Action(UP));
         return legalActions;
     }
 
@@ -82,7 +79,7 @@ public class Problem2 implements Problem {
     public agents.State reverseMove(agents.State state, agents.Action action) {
 
 
-        return move(state,action);
+        return move(state, action);
     }
 
     @Override
@@ -91,8 +88,7 @@ public class Problem2 implements Problem {
     }
 
     @Override
-    public boolean isGoal(agents.State state)
-    {
+    public boolean isGoal(agents.State state) {
         return state.equals(getFinalState().get(0));
     }
 
@@ -103,7 +99,7 @@ public class Problem2 implements Problem {
     }
 
     @Override
-    public ArrayList <agents.State> getFinalState() {
+    public ArrayList<agents.State> getFinalState() {
 
         ArrayList<agents.State> arrayList = new ArrayList<>();
         int[] board = {0, 1, 2, 3, 4, 5, 6, 7, 8};
@@ -201,7 +197,7 @@ public class Problem2 implements Problem {
 
         @Override
         public boolean equals(Object s) {
-            s = (agents.State)s;
+            s = (agents.State) s;
             for (int i = 0; i < board.length; i++)
                 if (this.board[i] != ((State) s).getBoard()[i]) {
                     return false;
@@ -210,12 +206,6 @@ public class Problem2 implements Problem {
 
 
             return true;
-        }
-
-        @Override
-        public boolean contains(agents.State s) {
-            System.out.println("dkajsdf;fkasd;");
-            return false;
         }
 
         @Override

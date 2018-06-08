@@ -1,10 +1,5 @@
 package problem;
 
-import agents.Action;
-import agents.State;
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.org.apache.regexp.internal.REDebugCompiler;
-
 import java.util.ArrayList;
 
 /**
@@ -221,9 +216,8 @@ public class Problem3 implements Problem {
     }
 
 
-
     @Override
-    public   String parseAction(Problem.State src, Problem.State dest) {
+    public String parseAction(Problem.State src, Problem.State dest) {
 
         ArrayList<agents.Action> actions = actionsFor(src);
         int act = 0;
@@ -299,7 +293,7 @@ public class Problem3 implements Problem {
 
         @Override
         public boolean equals(Object s) {
-            s = (agents.State)s;
+            s = (agents.State) s;
             for (int i = 0; i < board.length; i++)
                 if (this.board[i] != ((State) s).board[i])
                     return false;
@@ -315,10 +309,6 @@ public class Problem3 implements Problem {
             this.board = board;
         }
 
-        @Override
-        public boolean contains(agents.State s) {
-            return false;
-        }
 
         @Override
         public String to_String() {

@@ -9,7 +9,6 @@ import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -27,14 +26,19 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
 
         frontier.push(new Node(start));
         solution.memoryUsage++;
+        int counter = 0;
 
         while (!frontier.isEmpty()) {
 
             Node currentNode = frontier.pop();
+
+
+            counter++;
+
             solution.expandedNodes++;
             explored.add(currentNode.getState());
 
-//            TODO : path cost , best path;
+
             if (problem.isGoal(currentNode.getState())) {
                 solution.setBestPath(currentNode, (Problem.State) start);
                 solution.cost = currentNode.getPathCost();
@@ -50,14 +54,15 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
                 Node nextNode = new Node(nexState, currentNode, action, currentNode.getPathCost() +
                         problem.stepCost(currentNode.getState(), nexState, action), currentNode.getDepth() + 1);
 
-                if(! visited(nexState,explored , frontier)) {
+                if (!visited(nexState, explored, frontier)) {
+
                     frontier.push(nextNode);
                     solution.visitedNodes++;
                 }
 
             }
 
-            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size()+ explored.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size() + explored.size());
 
 
         }
@@ -68,22 +73,19 @@ public class DFS_Graph extends SearchAlgorithms implements Agent {
 
     private boolean visited(State childState, ArrayList<State> explored, Stack<Node> frontier) {
 
-//     todo : contains
         if (explored.contains(childState))
             return true;
+
         for (Node node : frontier) {
 
-            if (node.getState().equals(childState)) {
+            if (node.getState().equals(childState))
                 return true;
 
-            }
+
         }
 
         return false;
     }
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
+
 
 }

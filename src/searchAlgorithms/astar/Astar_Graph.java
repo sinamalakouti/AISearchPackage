@@ -94,9 +94,5 @@ public class Astar_Graph extends SearchAlgorithms implements Agent {
 
     }
 
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
 
 }

@@ -21,81 +21,79 @@ public class UCS_Tree extends SearchAlgorithms implements Agent {
     @Override
     public Solution solve(Problem problem, Problem.State start) {
 
-        PriorityQueue<Node> frontier = new PriorityQueue<>();
+        PriorityQueue<Node> frontier = new PriorityQueue<Node>();
+        solution = new Solution();
+
         Node currentnode = new Node(start);
         frontier.add(currentnode);
-        solution.visitedNodes++;
         solution.memoryUsage++;
-        while (!frontier.isEmpty()){
+        while (!frontier.isEmpty()) {
             currentnode = frontier.poll();
             solution.expandedNodes++;
-            if (problem.isGoal(currentnode.getState()))
+            if (problem.isGoal(currentnode.getState())) {
+
+                solution.setBestPath(currentnode, (Problem.State) start);
+                solution.cost = currentnode.getPathCost();
                 return solution;
-            ArrayList<Action> actions = new ArrayList<>();
-            for ( Action action : actions){
+            }
+            ArrayList<Action> actions = problem.actionsFor(currentnode.getState());
+            for (Action action : actions) {
                 State childState = problem.move(currentnode.getState(), action);
-                Node child = new Node(childState,currentnode, action, currentnode.getPathCost() +
-                        problem.stepCost(currentnode.getState(),childState,action), currentnode.getDepth() + 1);
+                Node child = new Node(childState, currentnode, action, currentnode.getPathCost() +
+                        problem.stepCost(currentnode.getState(), childState, action), currentnode.getDepth() + 1);
 
-                if( ! isExist(childState ,frontier)){
-                    frontier.add(child);
+                if (!isExist(childState, frontier)) {
                     solution.visitedNodes++;
-                }else {
 
-                    Node temp = getNode(childState,frontier);
+                    frontier.add(child);
+                } else {
 
-                    if(child.getPathCost() < temp.getPathCost()) {
+                    Node temp = getNode(childState, frontier);
+
+                    if (child.getPathCost() < temp.getPathCost()) {
                         frontier.add(child);
                         solution.visitedNodes++;
-                    }
-                    else {
+                    } else {
                         frontier.add(temp);
-                        solution.visitedNodes++;
+//                        solution.visitedNodes++;
                     }
 
                 }
             }
 
-            solution.memoryUsage = Math.max(solution.memoryUsage , frontier.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, frontier.size());
         }
 
 
-
-
         return null;
     }
 
 
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
+    public boolean isExist(State next, PriorityQueue<Node> frontier) {
 
-    public boolean isExist(State  next, PriorityQueue<Node> frontier){
-//TODO :
         Iterator it = frontier.iterator();
         while (it.hasNext()) {
-            if (  ((Node)it.next()).getState().equals(next)  )
+            if (((Node) it.next()).getState().equals(next))
                 return true;
         }
 
-        return  false;
+        return false;
 
     }
-    public Node getNode(State  next, PriorityQueue<Node> frontier){
-//TODO :
+
+    public Node getNode(State next, PriorityQueue<Node> frontier) {
+
         Iterator it = frontier.iterator();
         while (it.hasNext()) {
             Node node = ((Node) it.next());
-            if (  node.getState().equals(next)  ) {
-//                TODO : CHECK
-                it.remove();
+            if (node.getState().equals(next)) {
+                frontier.remove(node);
                 return node;
             }
         }
 
 
-        return  null;
+        return null;
 
     }
 }

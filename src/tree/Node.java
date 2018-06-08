@@ -3,21 +3,18 @@ package tree;
 import agents.Action;
 import agents.State;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-
 /**
  * Created by sina on 6/4/18.
  */
-public class Node implements Comparable{
+public class Node implements Comparable {
 //  attributes:
 
     private State state;
     private Node parent;
     private Action action;
-    private  int pathCost;
-    private  int depth;
-    private int fn ;
+    private int pathCost;
+    private int depth;
+    private int fn;
 
 //    constructors:
 
@@ -42,7 +39,7 @@ public class Node implements Comparable{
     }
 
     //    for root tree
-    public  Node(State state) {
+    public Node(State state) {
         this.state = state;
         this.action = null;
         this.parent = null;
@@ -53,11 +50,12 @@ public class Node implements Comparable{
 
     }
 
-//    helper methods
+    //    helper methods
     public State getState() {
 
         return state;
     }
+
     public int getFn() {
         return fn;
     }
@@ -145,7 +143,7 @@ public class Node implements Comparable{
     @Override
     public int compareTo(Object o) {
         o = ((Node) o);
-        if(this.getFn() >= ((Node) o).getFn() )
+        if (this.getFn() >= ((Node) o).getFn())
             return 1;
         else return -1;
 

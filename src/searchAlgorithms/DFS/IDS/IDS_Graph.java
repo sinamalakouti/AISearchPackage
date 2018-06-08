@@ -1,11 +1,9 @@
 package searchAlgorithms.DFS.IDS;
 
 import agents.Agent;
-import agents.State;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.DFS.DLS.DLS_Grpah;
-import searchAlgorithms.DFS.DLS.DLS_Tree;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
 
@@ -15,7 +13,6 @@ import tree.Node;
 public class IDS_Graph extends SearchAlgorithms implements Agent {
 
     final int maxLimitDepth = 20;
-
 
 
     @Override
@@ -43,8 +40,4 @@ public class IDS_Graph extends SearchAlgorithms implements Agent {
     }
 
 
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
 }

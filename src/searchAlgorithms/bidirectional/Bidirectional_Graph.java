@@ -40,7 +40,7 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
         backExplored.add(backCurrentNode.getState());
         solution.visitedNodes++;
         solution.visitedNodes++;
-        solution.memoryUsage +=2;
+        solution.memoryUsage += 2;
 
 
         startNode = frontCurrentNode;
@@ -142,7 +142,6 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
                         destFrontier.add(parent);
                         solution.visitedNodes++;
                         backExplored.add(parentState);
-//                        backCurrentNode.setParent(parent);
 
                         if (backCurrentNode.getState().equals(finalNode.getState())) {
                             finalNode.setParent(parent);
@@ -155,7 +154,7 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
 
             }
 
-            solution.memoryUsage = Math.max(solution.memoryUsage,destFrontier.size() + srcFrontier.size() + frontExplored.size() + backExplored.size());
+            solution.memoryUsage = Math.max(solution.memoryUsage, destFrontier.size() + srcFrontier.size() + frontExplored.size() + backExplored.size());
         }
         return null;
     }
@@ -177,10 +176,5 @@ public class Bidirectional_Graph extends SearchAlgorithms implements Agent {
         return null;
     }
 
-
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
 
 }

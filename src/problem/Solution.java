@@ -1,10 +1,8 @@
 package problem;
 
-import agents.Action;
 import agents.State;
 import tree.Node;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -13,12 +11,12 @@ import java.util.Stack;
  */
 public class Solution {
 
-    public int visitedNodes ;
+    public int visitedNodes;
     public int expandedNodes;
     public LinkedList<Node> bestPath;
     public int cost;
     public double memoryUsage;
-    public Problem problem ;
+    public Problem problem;
 
     public Solution() {
         visitedNodes = 0;
@@ -39,62 +37,61 @@ public class Solution {
     }
 
 
-    public String to_String1(){
+    public String to_String1() {
 
         String str = "";
-        str = "visited Nodes :" + visitedNodes + "\n expanded nodes : "+ expandedNodes +"\n cost : "+ cost + "\nmemory usage : " + memoryUsage+" \n path is :" ;
+        str = " visited Nodes: " + visitedNodes + "\n expanded nodes :" + expandedNodes + "\n cost : " + cost + "\n memory usage : " + memoryUsage + " \n path is :";
+        String result = "";
 
-        int counter = 0 ;
-        for (int i =0 ; i < bestPath.size() ; i++){
+        int counter = 0;
+        for (int i = 0; i < bestPath.size(); i++) {
 
-            counter ++;
-            if ( i != bestPath.size() - 1)
+            counter++;
+            if (i != bestPath.size() - 1) {
                 str += bestPath.get(i).getState().to_String() + " -> ";
-            else
-                str += bestPath.get(i).getState().to_String() ;
+                result += problem.parseAction((Problem.State) bestPath.get(i).getState(), (Problem.State) bestPath.get(i + 1).getState()) + " \t";
+            } else
+                str += bestPath.get(i).getState().to_String();
 
         }
-        System.out.println(counter);
-        return str;
+
+        return str + "\n result is :\t" + result;
 
     }
 
-    private String to_String2(){
+    private String to_String2() {
 
         String str = "";
-        str = "visited Nodes :" + visitedNodes + "\n expanded nodes : "+ expandedNodes +"\n cost : "+ cost + "\nmemory usage : " + memoryUsage+" \n path is :\n" ;
+        str = " visited Nodes :" + visitedNodes + "\n expanded nodes : " + expandedNodes + "\n cost : " + cost + "\n memory usage : " + memoryUsage + " \n path is :\n";
         String result = "";
-        int counter = 0 ;
-        for (int i =0 ; i < bestPath.size() ; i++){
+        int counter = 0;
+        for (int i = 0; i < bestPath.size(); i++) {
 
-            counter ++;
-            if ( i != bestPath.size() - 1) {
+            counter++;
+            if (i != bestPath.size() - 1) {
                 str += bestPath.get(i).getState().to_String() + " \n" + "\n";
-                    result+= problem.parseAction((Problem.State)bestPath.get(i).getState(),(Problem.State)bestPath.get(i+1).getState()) + " \t";
-            }
-            else {
+                result += problem.parseAction((Problem.State) bestPath.get(i).getState(), (Problem.State) bestPath.get(i + 1).getState()) + " \t";
+            } else {
                 str += bestPath.get(i).getState().to_String();
             }
 
         }
-        System.out.println(counter);
-        return (str + "\nactions are :\t"+ result);
-
+        return (str + "\nactions are :\t" + result);
 
 
     }
 
 
-    public void setBestPath(Node goal, State start){
+    public void setBestPath(Node goal, State start) {
         Node currentNode = goal;
         Node parent = goal.getParent();
         Stack<Node> path = new Stack<>();
 
-        while(currentNode != null) {
+        while (currentNode != null) {
             path.push(currentNode);
             currentNode = parent;
             if (currentNode != null)
-            parent = currentNode.getParent();
+                parent = currentNode.getParent();
         }
         while (!path.isEmpty())
             bestPath.add(path.pop());

@@ -9,7 +9,6 @@ import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -35,7 +34,6 @@ public class DFS_Tree extends SearchAlgorithms implements Agent {
             Node currentNode = frontier.pop();
             solution.expandedNodes++;
 
-//            TODO : path cost , best path;
             if (problem.isGoal(currentNode.getState()))
                 return solution;
 
@@ -57,12 +55,6 @@ public class DFS_Tree extends SearchAlgorithms implements Agent {
         }
 
 
-        return null;
-    }
-
-
-    @Override
-    public Object execute(Object p) {
         return null;
     }
 

@@ -15,7 +15,7 @@ import java.util.Stack;
 /**
  * Created by sina on 6/6/18.
  */
-public class DLS_Grpah extends SearchAlgorithms implements Agent{
+public class DLS_Grpah extends SearchAlgorithms implements Agent {
 
 
     private int limit;
@@ -25,7 +25,6 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
     public DLS_Grpah(int limit) {
         this.limit = limit;
     }
-
 
 
     @Override
@@ -38,19 +37,19 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
         visited.add(frontier.peek().getState());
         Object res = recursiveDLS(frontier.pop(), problem, limit);
 
-        if (res != null && ! res.getClass().equals(String.class))
-            return  (Solution) res;
-        else return  null;
+        if (res != null && !res.getClass().equals(String.class))
+            return (Solution) res;
+        else return null;
 
     }
 
 
-    public Object recursiveDLS (Node node, Problem problem, int limit){
+    public Object recursiveDLS(Node node, Problem problem, int limit) {
 
-        solution.expandedNodes ++;
+        solution.expandedNodes++;
         solution.visitedNodes++;
-        solution.memoryUsage = Math.max(solution.memoryUsage,visited.size());
-        if(!visited.contains(node.getState()))
+        solution.memoryUsage = Math.max(solution.memoryUsage, visited.size());
+        if (!visited.contains(node.getState()))
             visited.add(node.getState());
         if (problem.isGoal(node.getState())) {
             solution.setBestPath(node, (Problem.State) problem.getInitialState());
@@ -58,18 +57,18 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
             return solution;
         }
 //        cutt off occured
-        else  if (limit == 0 )return "cutOff";
+        else if (limit == 0) return "cutOff";
         else {
 
             boolean cutOffOccured = false;
-            for (Action action: problem.actionsFor(node.getState())) {
+            for (Action action : problem.actionsFor(node.getState())) {
 
 
                 State nextState = problem.move(node.getState(), action);
-                Node child  = new Node(nextState,node,action, node.getPathCost() +
-                        problem.stepCost(node.getState(),nextState,action), node.getDepth() + 1);
+                Node child = new Node(nextState, node, action, node.getPathCost() +
+                        problem.stepCost(node.getState(), nextState, action), node.getDepth() + 1);
 
-                if (visited(child.getState(),visited) == false) {
+                if (visited(child.getState(), visited) == false) {
                     visited.add(child.getState());
                     Object result = recursiveDLS(child, problem, limit - 1);
 
@@ -82,7 +81,6 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
                 }
 
 
-
             }
 
             if (cutOffOccured == true)
@@ -90,24 +88,17 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent{
             else return null;
 
 
-
         }
     }
 
 
-    private boolean visited (State state , ArrayList<State> visited ){
-// TODO :
+    private boolean visited(State state, ArrayList<State> visited) {
 
-        if(visited.contains(state))
+        if (visited.contains(state))
             return true;
-        return  false;
+        return false;
 
     }
 
-
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
 
 }

@@ -8,7 +8,5 @@ public interface State {
     @Override
     public boolean equals(Object o);
 
-    public boolean contains( State s);
-
     public String to_String();
 }

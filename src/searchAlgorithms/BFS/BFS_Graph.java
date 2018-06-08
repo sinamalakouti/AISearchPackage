@@ -14,7 +14,7 @@ import java.util.LinkedList;
 /**
  * Created by sina on 6/6/18.
  */
-public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
+public class BFS_Graph extends SearchAlgorithms implements Agent {
 
     public Solution solve(Problem problem, Problem.State start) {
 
@@ -32,7 +32,6 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
             explored.add(currentNode.getState());
 
 
-
             if (problem.isGoal(currentNode.getState())) {
                 solution.setBestPath(currentNode, (State) start);
                 solution.cost = currentNode.getPathCost();
@@ -44,18 +43,18 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
 
                 State nxtState = problem.move(currentNode.getState(), actions.get(i));
                 if (problem.isGoal(nxtState)) {
-                   Node nex =  new Node(nxtState, currentNode, actions.get(i), currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, actions.get(i)),
+                    Node nex = new Node(nxtState, currentNode, actions.get(i), currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, actions.get(i)),
                             currentNode.getDepth() + 1);
-                    solution.setBestPath(nex,  start);
+                    solution.setBestPath(nex, start);
                     solution.cost = nex.getPathCost();
 
                     return solution;
                 }
 
                 Action act = actions.get(i);
-                Node child =  new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
+                Node child = new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
                         currentNode.getDepth() + 1);
-                if (!visited(child.getState(),explored,fringe))
+                if (!visited(child.getState(), explored, fringe))
                     fringe.addLast(child);
 
 
@@ -71,15 +70,8 @@ public class BFS_Graph<S, A> extends SearchAlgorithms implements Agent<S, A> {
     }
 
 
-    @Override
-    public A execute(S p) {
-        return null;
-    }
-
-
     private boolean visited(State childState, LinkedList<State> explored, LinkedList<Node> frontier) {
 
-//     todo : contains
         if (explored.contains(childState))
             return true;
         for (Node node : frontier) {

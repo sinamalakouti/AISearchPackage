@@ -1,7 +1,6 @@
 package problem;
 
 import agents.Action;
-import agents.State;
 
 import java.util.ArrayList;
 
@@ -12,25 +11,30 @@ import java.util.ArrayList;
 
 public interface Problem {
     ArrayList<Action> actionsFor(agents.State state);
+
     ArrayList<Action> reverseActionsFor(agents.State state);
 
     agents.State move(agents.State state, Action action);
+
     agents.State reverseMove(agents.State state, Action action);
+
     int stepCost(agents.State src, agents.State dest, Action action);
+
     boolean isGoal(agents.State state);
+
     agents.State getInitialState();
+
     ArrayList<agents.State> getFinalState();
 
-    public  String parseAction(State src , State dest);
-    public int getHeuristic( State source , State dest);
+    public String parseAction(State src, State dest);
+
+    public int getHeuristic(State source, State dest);
 
 
+    public abstract class State implements agents.State {
 
-
-    public abstract class State implements agents.State{
-
-        protected int row ,col;
-        protected  ArrayList<agents.Action> actions = new ArrayList<>();
+        protected int row, col;
+        protected ArrayList<agents.Action> actions = new ArrayList<>();
 
 
         public int getRow() {

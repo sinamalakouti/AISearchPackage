@@ -14,8 +14,7 @@ import java.util.LinkedList;
 /**
  * Created by sina on 6/6/18.
  */
-public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
-
+public class BFS_Tree extends SearchAlgorithms implements Agent {
 
 
     public Solution solve(Problem problem, Problem.State start) {
@@ -27,15 +26,13 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
         solution.visitedNodes++;
         solution.memoryUsage++;
 
-
         while (!fringe.isEmpty()) {
 
             Node currentNode = fringe.removeFirst();
-// TODO:            solution.bestPath.addFirst();
+
             solution.expandedNodes++;
 
 
-//   TODO:          solution.cost ++;
             if (problem.isGoal(currentNode.getState())) {
                 solution.setBestPath(currentNode, (Problem.State) start);
                 solution.cost = currentNode.getPathCost();
@@ -43,7 +40,6 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
             }
             ArrayList<Action> actions = problem.actionsFor(currentNode.getState());
             for (int i = 0; i < actions.size(); i++) {
-//               todo path cost
 
 
                 State nxtState = problem.move(currentNode.getState(), actions.get(i));
@@ -54,7 +50,7 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
                 }
 
                 Action act = actions.get(i);
-               Node child =  new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
+                Node child = new Node(nxtState, currentNode, act, currentNode.getPathCost() + problem.stepCost(currentNode.getState(), nxtState, act),
                         currentNode.getDepth() + 1);
                 fringe.addLast(child);
                 solution.visitedNodes++;
@@ -70,8 +66,5 @@ public class BFS_Tree<S, A> extends SearchAlgorithms implements Agent<S, A>  {
         return null;
     }
 
-    @Override
-    public A execute(S p) {
-        return null;
-    }
+
 }

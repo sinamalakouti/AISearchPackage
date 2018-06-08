@@ -8,7 +8,6 @@ import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
 import tree.Node;
 
-import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -44,14 +43,14 @@ public class DLS_Tree extends SearchAlgorithms implements Agent {
 
         solution.expandedNodes++;
         solution.visitedNodes++;
-        
+
 
         if (problem.isGoal(node.getState())) {
             solution.setBestPath(node, (Problem.State) problem.getInitialState());
             solution.cost = node.getPathCost();
             return solution;
         }
-//        cutt off occured
+//        cut off occurred
         else if (limit == 0) return "cutOff";
         else {
 
@@ -62,17 +61,15 @@ public class DLS_Tree extends SearchAlgorithms implements Agent {
                 State nextState = problem.move(node.getState(), action);
                 Node child = new Node(nextState, node, action, node.getPathCost() + problem.stepCost(node.getState(), nextState, action), node.getDepth() + 1);
 
-//                if (visited(child.getState(), visited) == false) {
-//                    visited.add(child.getState());
-                    Object result = recursiveDLS(child, problem, limit - 1);
+
+                Object result = recursiveDLS(child, problem, limit - 1);
 
 
-                    if (result != null && result.getClass().equals(String.class)) {
-                        if (((String) result).compareTo("cutOff") == 0)
-                            cutOffOccured = true;
-                    } else if (result != null)
-                        return result;
-//                }
+                if (result != null && result.getClass().equals(String.class)) {
+                    if (((String) result).compareTo("cutOff") == 0)
+                        cutOffOccured = true;
+                } else if (result != null)
+                    return result;
 
 
             }
@@ -85,10 +82,5 @@ public class DLS_Tree extends SearchAlgorithms implements Agent {
         }
     }
 
-
-    @Override
-    public Object execute(Object p) {
-        return null;
-    }
 
 }
