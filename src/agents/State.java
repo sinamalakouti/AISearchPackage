@@ -9,4 +9,5 @@ public interface State {
     public boolean equals(Object o);
 
     public String to_String();
+
 }

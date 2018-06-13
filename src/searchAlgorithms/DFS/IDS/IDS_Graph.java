@@ -1,6 +1,8 @@
 package searchAlgorithms.DFS.IDS;
 
 import agents.Agent;
+import agents.State;
+import controller.MainProblem;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.DFS.DLS.DLS_Grpah;
@@ -16,7 +18,8 @@ public class IDS_Graph extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, Problem.State start) {
+    public Solution solve(MainProblem mainProblem, State start) {
+        Problem problem = ((Problem) mainProblem);
         Node currentNode = new Node(start);
         solution = new Solution();
 

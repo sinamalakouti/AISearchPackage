@@ -3,6 +3,7 @@ package searchAlgorithms.bidirectional;
 import agents.Action;
 import agents.Agent;
 import agents.State;
+import controller.MainProblem;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
@@ -24,7 +25,9 @@ public class Bidirectional_Tree extends SearchAlgorithms implements Agent {
     Node finalNode;
 
     @Override
-    public Solution solve(Problem problem, Problem.State start) {
+    public Solution solve(MainProblem mainProblem, State start) {
+
+        Problem problem = ((Problem) mainProblem);
 
         Node frontCurrentNode = new Node(start);
         Node backCurrentNode = new Node(problem.getFinalState().get(0));

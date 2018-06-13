@@ -1,6 +1,8 @@
 package problem;
 
 import agents.State;
+import controller.MainSolution;
+import localsearch.localSearchProblems.GraphColoring;
 import tree.Node;
 
 import java.util.LinkedList;
@@ -9,7 +11,7 @@ import java.util.Stack;
 /**
  * Created by sina on 6/4/18.
  */
-public class Solution {
+public class Solution  extends MainSolution{
 
     public int visitedNodes;
     public int expandedNodes;
@@ -30,8 +32,12 @@ public class Solution {
     public String toString() {
         if (problem.getClass().equals(Problem1.class))
             return to_String1();
-        else
+        else if(problem.getClass().equals(Problem2.class) || problem.getClass().equals(Problem3.class))
             return to_String2();
+        else if ( problem.getClass().equals(GraphColoring.class))
+            return "";
+
+        return "";
 
 
     }

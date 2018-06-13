@@ -3,9 +3,11 @@ package searchAlgorithms.DFS.DLS;
 import agents.Action;
 import agents.Agent;
 import agents.State;
+import controller.MainProblem;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
+import sun.applet.Main;
 import tree.Node;
 
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class DLS_Grpah extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, Problem.State start) {
+    public Solution solve(MainProblem mainProblem, State start) {
+
+        Problem problem = ((Problem) mainProblem);
         Stack<Node> frontier = new Stack<>();
         solution = new Solution();
         frontier.push(new Node(start));

@@ -3,6 +3,7 @@ package searchAlgorithms.astar;
 import agents.Action;
 import agents.Agent;
 import agents.State;
+import controller.MainProblem;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
@@ -19,8 +20,9 @@ public class Astar_Graph extends SearchAlgorithms implements Agent {
 
 
     @Override
-    public Solution solve(Problem problem, Problem.State start) {
+    public Solution solve(MainProblem mainProblem, State start) {
 
+       Problem problem = ((Problem) mainProblem);
         PriorityQueue<Node> frontier = new PriorityQueue<>();
         ArrayList<State> explored = new ArrayList<>();
 

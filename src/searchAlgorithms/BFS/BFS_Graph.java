@@ -3,9 +3,11 @@ package searchAlgorithms.BFS;
 import agents.Action;
 import agents.Agent;
 import agents.State;
+import controller.MainProblem;
 import problem.Problem;
 import problem.Solution;
 import searchAlgorithms.SearchAlgorithms;
+import sun.applet.Main;
 import tree.Node;
 
 import java.util.ArrayList;
@@ -16,8 +18,9 @@ import java.util.LinkedList;
  */
 public class BFS_Graph extends SearchAlgorithms implements Agent {
 
-    public Solution solve(Problem problem, Problem.State start) {
+    public Solution solve(MainProblem mainProblem, State start) {
 
+        Problem problem = ((Problem) mainProblem);
         LinkedList<Node> fringe = new LinkedList<Node>();
         LinkedList<State> explored = new LinkedList<State>();
         solution = new Solution();

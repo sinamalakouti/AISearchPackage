@@ -3,13 +3,14 @@ package problem;
 import agents.Action;
 
 import java.util.ArrayList;
+import controller.MainProblem;
 
 /**
  * Created by sina on 6/4/18.
  */
 
 
-public interface Problem {
+public interface Problem extends  MainProblem {
     ArrayList<Action> actionsFor(agents.State state);
 
     ArrayList<Action> reverseActionsFor(agents.State state);
