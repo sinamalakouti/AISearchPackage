@@ -17,6 +17,8 @@ public interface Problem  extends MainProblem{
 
     public int calculateValue (State state);
     public void setInitialState( int numberOfColors);
+    public GraphColoring.State getInitialState();
+    public  LocalNode getFirstBetterNeighbour(LocalNode currentNode);
 
 
-}
+    }

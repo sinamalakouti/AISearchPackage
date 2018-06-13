@@ -1,6 +1,5 @@
 package localsearch.hillclimbing;
 
-import agents.Action;
 import agents.Agent;
 import agents.State;
 import controller.MainProblem;
@@ -9,14 +8,13 @@ import localsearch.LocalNode;
 import localsearch.LocalSearchAlgorithm;
 import localsearch.localSearchProblems.Problem;
 
-
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
  * Created by sina on 6/13/18.
  */
-public class HillClimbing extends LocalSearchAlgorithm  implements Agent{
+public class FirstChoiceHillClimbing extends LocalSearchAlgorithm implements Agent {
+
 
 
     private int flatCounter = 0 ;
@@ -29,14 +27,15 @@ public class HillClimbing extends LocalSearchAlgorithm  implements Agent{
         LocalNode currentNode = new LocalNode(start);
         currentNode.setValue(problem.calculateValue(start));
         while (true) {
+            LocalNode neighbour = problem.getFirstBetterNeighbour(currentNode);
+            if (neighbour == null)
+                return  null;
+            solution.numberOfVisitedNodes ++;
 
-            PriorityQueue<LocalNode> neighbours = problem.getNeighbours(currentNode);
-
-            solution.numberOfVisitedNodes += neighbours.size();
-
-            LocalNode bestNeighbour = neighbours.poll();
+            LocalNode bestNeighbour = neighbour;
             if (bestNeighbour.getValue() > currentNode.getValue()) {
                 System.out.println(currentNode.getState().to_String());
+                System.out.println(currentNode.getValue());
                 solution.finalState = currentNode.getState();
                 solution.value = problem.calculateValue(solution.finalState);
                 return solution;
@@ -45,6 +44,7 @@ public class HillClimbing extends LocalSearchAlgorithm  implements Agent{
                     System.out.println(currentNode.getState().to_String());
                     solution.finalState = currentNode.getState();
                     solution.value = problem.calculateValue(solution.finalState);
+                    System.out.println(currentNode.getValue());
                     return solution;
                 } else {
                     flatCounter++;
@@ -62,3 +62,5 @@ public class HillClimbing extends LocalSearchAlgorithm  implements Agent{
 
     }
 }
+
+

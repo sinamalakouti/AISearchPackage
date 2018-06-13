@@ -1,5 +1,8 @@
 import controller.MainSolution;
+import localsearch.hillclimbing.FirstChoiceHillClimbing;
 import localsearch.hillclimbing.HillClimbing;
+import localsearch.hillclimbing.RandomStartHC;
+import localsearch.hillclimbing.StochasticHillClimbing;
 import localsearch.localSearchProblems.GraphColoring;
 import problem.*;
 import searchAlgorithms.DFS.IDS.IDS_Graph;
@@ -107,8 +110,8 @@ public class Main {
 
 
 
-        GraphColoring graphColoring = new GraphColoring(matrix,4,2);
-        HillClimbing hillClimbing = new HillClimbing();
+        GraphColoring graphColoring = new GraphColoring(matrix,4,3);
+        FirstChoiceHillClimbing hillClimbing = new FirstChoiceHillClimbing();
        MainSolution sol =  hillClimbing.solve(graphColoring,graphColoring.getInitialState());
         System.out.println(sol);
     }

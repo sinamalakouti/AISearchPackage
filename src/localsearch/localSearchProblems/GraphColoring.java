@@ -4,6 +4,7 @@ import agents.State;
 import localsearch.LocalNode;
 
 import java.util.PriorityQueue;
+import java.util.Random;
 
 /**
  * Created by sina on 6/13/18.
@@ -60,11 +61,13 @@ public class GraphColoring implements Problem {
         State start= new State();
         int [] graph = new int[numberOfNodes];
 //        // TODO: 6/13/18
-        graph[0] =0;
-        graph[1] =1;
-        graph[2] =0;
-        graph[3] =0;
+        Random rand = new Random();
+        for (int i =0 ; i < numberOfNodes ; i++){
 
+            graph[i] = rand.nextInt(numberOfColors);
+
+
+        }
         start.setGraph(graph);
         this.initialState = start;
     }
@@ -77,10 +80,39 @@ public class GraphColoring implements Problem {
         this.finalState = finalState;
     }
 
+@Override
     public State getInitialState(){
         if(this.initialState == null)
             setInitialState(numberOfColors);
         return this.initialState;
+    }
+
+    @Override
+    public LocalNode getFirstBetterNeighbour(LocalNode currentNode) {
+        boolean findBetter = false;
+        LocalNode neighbour = null;
+
+        for (int i = 0 ; i<numberOfNodes ; i ++){
+            for (int j = 0 ; j< numberOfColors ;j++){
+
+                int [] colors = ((State)currentNode.getState()).getGraph();
+                if(colors[i] != j){
+                    State newState = new State();
+                    newState.setGraph(colors.clone());
+                    newState.getGraph()[i] = j;
+                     neighbour = new LocalNode(newState);
+                    neighbour.setValue(calculateValue(newState));
+                    neighbour.setParent(currentNode);
+                    if(neighbour.getValue() <  currentNode.getValue() )
+                        return neighbour;
+                }
+
+
+            }
+
+
+        }
+        return neighbour;
     }
 
     public int calculateNumberOfInversions(agents.State state){
