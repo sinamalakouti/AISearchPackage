@@ -1,11 +1,16 @@
 import controller.MainSolution;
-import localsearch.hillclimbing.FirstChoiceHillClimbing;
-import localsearch.hillclimbing.HillClimbing;
-import localsearch.hillclimbing.RandomStartHC;
-import localsearch.hillclimbing.StochasticHillClimbing;
+import localsearch.SimulatedAnnealing;
+import localsearch.hillclimbing.*;
+import localsearch.hillclimbing.Solution;
 import localsearch.localSearchProblems.GraphColoring;
 import problem.*;
 import searchAlgorithms.DFS.IDS.IDS_Graph;
+import localsearch.localSearchProblems.wordTable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 public class Main {
 
@@ -112,8 +117,34 @@ public class Main {
 
         GraphColoring graphColoring = new GraphColoring(matrix,4,3);
         FirstChoiceHillClimbing hillClimbing = new FirstChoiceHillClimbing();
-       MainSolution sol =  hillClimbing.solve(graphColoring,graphColoring.getInitialState());
+//       MainSolution sol =  hillClimbing.solve(graphColoring,graphColoring.getInitialState());
+////        System.out.println(sol);
+
+//        wordTable problem
+
+        ArrayList<String> dictionary = new ArrayList<>();
+        dictionary.add("cool");
+        dictionary.add("cat");
+        dictionary.add("talk");
+        dictionary.add("go");
+
+        wordTable wordTable = new wordTable(dictionary,4,3);
+        SimulatedAnnealing simulatedAnnealing =new SimulatedAnnealing();
+      MainSolution sol =   simulatedAnnealing.solve(wordTable,wordTable.getInitialState());
         System.out.println(sol);
+        System.out.println(sol);
+        System.out.println(((Solution)sol).finalState);
+        System.out.println(        wordTable.calculateValue(((Solution)sol).finalState));
+        localsearch.localSearchProblems.wordTable.State s = ((localsearch.localSearchProblems.wordTable.State)((Solution)sol).finalState);
+        for (int i = 0 ; i< 4 ; i++)
+            for (int j =0 ; j < 3; j++)
+                System.out.println(s.getCharTable()[i][j]   );
+
+
+//        int t = 100;
+//        double alpa = 0.9;
+//        System.out.println(t *alpa);
+
     }
 // path is :( 0, 0 ) -> ( 1, 0 ) -> ( 2, 0 ) -> ( 3, 0 ) -> ( 3, 1 ) -> ( 4, 1 ) -> ( 4, 2 ) -> ( 4, 3 ) -> ( 4, 4 )
 

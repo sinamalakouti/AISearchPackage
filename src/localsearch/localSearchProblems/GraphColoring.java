@@ -57,14 +57,14 @@ public class GraphColoring implements Problem {
     }
 
     @Override
-    public void setInitialState(int numberOfColors) {
+    public void setInitialState() {
         State start= new State();
         int [] graph = new int[numberOfNodes];
 //        // TODO: 6/13/18
         Random rand = new Random();
         for (int i =0 ; i < numberOfNodes ; i++){
 
-            graph[i] = rand.nextInt(numberOfColors);
+            graph[i] = rand.nextInt(this.numberOfColors);
 
 
         }
@@ -72,7 +72,8 @@ public class GraphColoring implements Problem {
         this.initialState = start;
     }
 
-    public State getFinalState() {
+    @Override
+    public agents.State getFinalState() {
         return finalState;
     }
 
@@ -81,9 +82,9 @@ public class GraphColoring implements Problem {
     }
 
 @Override
-    public State getInitialState(){
+    public agents.State getInitialState(){
         if(this.initialState == null)
-            setInitialState(numberOfColors);
+            setInitialState();
         return this.initialState;
     }
 

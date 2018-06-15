@@ -8,9 +8,9 @@ import controller.MainSolution;
  */
 public class Solution extends MainSolution{
 
-    State finalState;
-    int value;
-    int numberOfExpanedNodes;
-    int numberOfVisitedNodes;
+    public State finalState;
+    public  int value;
+    public  int numberOfExpanedNodes;
+    public  int numberOfVisitedNodes;
 
 }

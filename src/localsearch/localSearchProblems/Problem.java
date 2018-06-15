@@ -16,9 +16,9 @@ public interface Problem  extends MainProblem{
     PriorityQueue<LocalNode> getNeighbours(LocalNode currentNode);   // maxHeap
 
     public int calculateValue (State state);
-    public void setInitialState( int numberOfColors);
-    public GraphColoring.State getInitialState();
+    public void setInitialState();
+    public State getInitialState();
     public  LocalNode getFirstBetterNeighbour(LocalNode currentNode);
-
+    public agents.State getFinalState();
 
     }
