@@ -20,5 +20,8 @@ public interface Problem  extends MainProblem{
     public State getInitialState();
     public  LocalNode getFirstBetterNeighbour(LocalNode currentNode);
     public agents.State getFinalState();
-
+    public ArrayList<Integer> createChromosome(State state);
+    public ArrayList<Integer> getPossibleChromosomeValues();
+    public State chromosomeToState(ArrayList<Integer> chromosoe);
+    public ArrayList<LocalNode> getKStates(int k );
     }

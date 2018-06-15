@@ -3,6 +3,7 @@ package localsearch.localSearchProblems;
 import agents.State;
 import localsearch.LocalNode;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -75,6 +76,26 @@ public class GraphColoring implements Problem {
     @Override
     public agents.State getFinalState() {
         return finalState;
+    }
+
+    @Override
+    public ArrayList<Integer> createChromosome(agents.State state) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> getPossibleChromosomeValues() {
+        return null;
+    }
+
+    @Override
+    public agents.State chromosomeToState(ArrayList<Integer> chromosoe) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<LocalNode> getKStates(int k) {
+        return null;
     }
 
     public void setFinalState(State finalState) {

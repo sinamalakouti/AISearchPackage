@@ -247,6 +247,26 @@ public class wordTable implements Problem {
         return finalState;
     }
 
+    @Override
+    public ArrayList<Integer> createChromosome(agents.State state) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Integer> getPossibleChromosomeValues() {
+        return null;
+    }
+
+    @Override
+    public agents.State chromosomeToState(ArrayList<Integer> chromosoe) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<LocalNode> getKStates(int k) {
+        return null;
+    }
+
     public class State implements agents.State {
 
         char[][] charTable;
