@@ -24,4 +24,6 @@ public interface Problem  extends MainProblem{
     public ArrayList<Integer> getPossibleChromosomeValues();
     public State chromosomeToState(ArrayList<Integer> chromosoe);
     public ArrayList<LocalNode> getKStates(int k );
+    public State mutate(State state);
+    public State crossOver (State father , State mother);
     }

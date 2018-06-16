@@ -98,6 +98,16 @@ public class GraphColoring implements Problem {
         return null;
     }
 
+    @Override
+    public agents.State mutate(agents.State state) {
+        return null;
+    }
+
+    @Override
+    public agents.State crossOver(agents.State father, agents.State mother) {
+        return null;
+    }
+
     public void setFinalState(State finalState) {
         this.finalState = finalState;
     }

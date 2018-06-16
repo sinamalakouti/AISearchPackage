@@ -267,6 +267,16 @@ public class wordTable implements Problem {
         return null;
     }
 
+    @Override
+    public agents.State mutate(agents.State state) {
+        return null;
+    }
+
+    @Override
+    public agents.State crossOver(agents.State father, agents.State mother) {
+        return null;
+    }
+
     public class State implements agents.State {
 
         char[][] charTable;

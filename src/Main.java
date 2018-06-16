@@ -1,8 +1,10 @@
 import controller.MainSolution;
+import localsearch.Genetic;
 import localsearch.SimulatedAnnealing;
 import localsearch.hillclimbing.*;
 import localsearch.hillclimbing.Solution;
 import localsearch.localSearchProblems.GraphColoring;
+import localsearch.localSearchProblems.Keyboard;
 import problem.*;
 import searchAlgorithms.DFS.IDS.IDS_Graph;
 import localsearch.localSearchProblems.wordTable;
@@ -122,29 +124,41 @@ public class Main {
 
 //        wordTable problem
 
-        ArrayList<String> dictionary = new ArrayList<>();
-        dictionary.add("cool");
-        dictionary.add("cat");
-        dictionary.add("talk");
-        dictionary.add("go");
-
-        wordTable wordTable = new wordTable(dictionary,4,3);
-        SimulatedAnnealing simulatedAnnealing =new SimulatedAnnealing();
-      MainSolution sol =   simulatedAnnealing.solve(wordTable,wordTable.getInitialState());
-        System.out.println(sol);
-        System.out.println(sol);
-        System.out.println(((Solution)sol).finalState);
-        System.out.println(        wordTable.calculateValue(((Solution)sol).finalState));
-        localsearch.localSearchProblems.wordTable.State s = ((localsearch.localSearchProblems.wordTable.State)((Solution)sol).finalState);
-        for (int i = 0 ; i< 4 ; i++)
-            for (int j =0 ; j < 3; j++)
-                System.out.println(s.getCharTable()[i][j]   );
+//        ArrayList<String> dictionary = new ArrayList<>();
+//        dictionary.add("cool");
+//        dictionary.add("cat");
+//        dictionary.add("talk");
+//        dictionary.add("go");
+//
+//        wordTable wordTable = new wordTable(dictionary,4,3);
+//        SimulatedAnnealing simulatedAnnealing =new SimulatedAnnealing();
+//      MainSolution sol =   simulatedAnnealing.solve(wordTable,wordTable.getInitialState());
+//        System.out.println(sol);
+//        System.out.println(sol);
+//        System.out.println(((Solution)sol).finalState);
+//        System.out.println(        wordTable.calculateValue(((Solution)sol).finalState));
+//        localsearch.localSearchProblems.wordTable.State s = ((localsearch.localSearchProblems.wordTable.State)((Solution)sol).finalState);
+//        for (int i = 0 ; i< 4 ; i++)
+//            for (int j =0 ; j < 3; j++)
+//                System.out.println(s.getCharTable()[i][j]   );
 
 
 //        int t = 100;
 //        double alpa = 0.9;
 //        System.out.println(t *alpa);
 
+
+
+
+//        problem keyboard
+
+        Keyboard key = new Keyboard();
+        Genetic gen = new Genetic(20,1000,0.2d);
+        Solution sol = (Solution) gen.solve(key,key.getInitialState());
+
+
+
+        System.out.println(sol.finalState.to_String());
     }
 // path is :( 0, 0 ) -> ( 1, 0 ) -> ( 2, 0 ) -> ( 3, 0 ) -> ( 3, 1 ) -> ( 4, 1 ) -> ( 4, 2 ) -> ( 4, 3 ) -> ( 4, 4 )
 
