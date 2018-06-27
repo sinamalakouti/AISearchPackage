@@ -34,17 +34,14 @@ public class SimulatedAnnealing extends LocalSearchAlgorithm implements Agent {
 
             for (int t = 1 ; t < Integer.MAX_VALUE  ; t ++){
 //                cooling schedule
-                double T = schedule(t,0);
-                if (T == 0 || currentNode.getState().equals(problem.getFinalState())
-                            )
+                double T = schedule(t,2);
+                if (T == 0 || currentNode.getState().equals(problem.getFinalState()))
                 {
                     sol.finalState = currentNode.getState();
+//                    sol.setBestPath(currentNode);
                     return sol;
                 }
 
-//                if(currentNode.getValue() == problem.calculateValue(problem.getFinalState())){
-//                    System.out.println("fuck");
-//                }//else System.out.println("val is \t" + problem.calculateValue(currentNode.getState()));
 
 
 //                pick random
@@ -52,8 +49,16 @@ public class SimulatedAnnealing extends LocalSearchAlgorithm implements Agent {
 
 
 
-//                if ( prev == null || !currentNode.equals(prev) || neighbours.size() == 1) {
                     neighbours = problem.getNeighbours(currentNode);
+
+
+                if ( prev != null)
+                {
+                    if ( currentNode.equals(currentNode)){
+                        sol.numberOfVisitedNodes +=neighbours.size();
+                        sol.numberOfExpanedNodes++;
+                    }
+                }
                     prev = currentNode;
 
 //                }
@@ -65,22 +70,32 @@ public class SimulatedAnnealing extends LocalSearchAlgorithm implements Agent {
                 int rand1 =random.nextInt(neighArray.length -1);
 
                 LocalNode neighbour = (LocalNode) neighArray[rand1];
+
 //                neighbours.remove(neighbour);
 
                 double deltaE = neighbour.getValue()  - currentNode.getValue();
 
 
                 if ( deltaE > 0 ) {
+
+                    LocalNode parent = new LocalNode(currentNode.getState());
+                    parent.setParent(currentNode.getParent());
+                    neighbour.setParent(parent);
+
                     currentNode = neighbour;
                 }
                 else if(deltaE <= 0)
                 {
                     double p = Math.exp(deltaE / T);
                     double rand = Math.random();
-//                    System.out.println(p);
 
-                    if(rand < p )
+                    if(rand < p ) {
+
+                        LocalNode parent = new LocalNode(currentNode.getState());
+                        parent.setParent(currentNode.getParent());
+                        neighbour.setParent(parent);
                         currentNode = neighbour;
+                    }
 
                 }
 
@@ -90,6 +105,7 @@ public class SimulatedAnnealing extends LocalSearchAlgorithm implements Agent {
 
 
         sol.finalState = currentNode.getState();
+//        sol.setBestPath(currentNode);
         return sol;
 
 
@@ -111,19 +127,21 @@ public class SimulatedAnnealing extends LocalSearchAlgorithm implements Agent {
                 double b = T_init - alpha;
 
 
-//                System.out.println(T_init - alpha * t);
-
                 T = this.T_init - alpha * t;
 
                 break;
             case 1:
-                alpha = 0.85d;
+                alpha = 0.95d;
                  T = T_init * Math.pow(alpha,t);
 
                 break;
             case 2:
-                alpha = 2d;
+                alpha = 10d;
+
                 T = T_init / ( new Double("1") + alpha * Math.log((1 + t)));
+//                System.out.println(T);
+                if(T < 0.01d)
+                T=0;
                 break;
 
 

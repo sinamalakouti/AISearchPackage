@@ -4,6 +4,7 @@ import agents.State;
 import localsearch.LocalNode;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class GraphColoring implements Problem {
     @Override
     public PriorityQueue<LocalNode> getNeighbours(LocalNode currentNode) {
 
-        PriorityQueue<LocalNode> neighbours = new PriorityQueue<>();
+        PriorityQueue<LocalNode> neighbours = new PriorityQueue<>(1, Comparator.reverseOrder());
         for (int i = 0 ; i<numberOfNodes ; i ++){
             for (int j = 0 ; j< numberOfColors ;j++){
 
@@ -54,7 +55,7 @@ public class GraphColoring implements Problem {
 
     @Override
     public int calculateValue(agents.State state) {
-        return calculateNumberOfInversions(state);
+        return calculateNumberOfInversions(state) / 2;
     }
 
     @Override
@@ -116,6 +117,7 @@ public class GraphColoring implements Problem {
     public agents.State getInitialState(){
         if(this.initialState == null)
             setInitialState();
+
         return this.initialState;
     }
 
@@ -135,7 +137,7 @@ public class GraphColoring implements Problem {
                      neighbour = new LocalNode(newState);
                     neighbour.setValue(calculateValue(newState));
                     neighbour.setParent(currentNode);
-                    if(neighbour.getValue() <  currentNode.getValue() )
+                    if(neighbour.getValue() >  currentNode.getValue() )
                         return neighbour;
                 }
 
@@ -156,7 +158,7 @@ public class GraphColoring implements Problem {
             for (int j=0; j< numberOfNodes ; j++){
 
 
-                if(i != j && adjMatix[i][j] == 1 && ((State) state).getGraph()[i] == ((State) state).getGraph()[j])
+                if(i != j && adjMatix[i][j] == 1 && ((State) state).getGraph()[i] != ((State) state).getGraph()[j])
                     numberOfInversions ++;
             }
 
@@ -174,9 +176,11 @@ public class GraphColoring implements Problem {
 
         @Override
         public String to_String() {
-            String str = "";
+            String str = "colors are as follows:";
             for (int i =0 ; i<numberOfNodes ; i++)
                 str += graph[i] + " ";
+            str +="\n";
+            str += "value:\t" + calculateValue(this);
 
             return str;
 

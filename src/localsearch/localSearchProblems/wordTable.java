@@ -295,7 +295,17 @@ public class wordTable implements Problem {
 
         @Override
         public String to_String() {
-            return null;
+            String str = "state is:\n";
+            for (int i = 0 ; i <numberOfRows ; i++ ){
+                for ( int j =0 ; j < numberOfCols ; j++){
+
+                    str += charTable[i][j] + " ";
+                }
+                str +="\n";
+            }
+
+            str += "value is:\t" + calculateValue(this) +"\n";
+            return str;
         }
 
         @Override

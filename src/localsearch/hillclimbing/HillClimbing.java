@@ -8,6 +8,7 @@ import controller.MainSolution;
 import localsearch.LocalNode;
 import localsearch.LocalSearchAlgorithm;
 import localsearch.localSearchProblems.Problem;
+import sun.plugin2.os.windows.FLASHWINFO;
 
 
 import java.util.ArrayList;
@@ -35,25 +36,39 @@ public class HillClimbing extends LocalSearchAlgorithm  implements Agent{
             solution.numberOfVisitedNodes += neighbours.size();
 
             LocalNode bestNeighbour = neighbours.poll();
-            if (bestNeighbour.getValue() > currentNode.getValue()) {
-                System.out.println(currentNode.getState().to_String());
+            if (bestNeighbour.getValue() < currentNode.getValue()) {
+
+
                 solution.finalState = currentNode.getState();
                 solution.value = problem.calculateValue(solution.finalState);
+                solution.setBestPath(currentNode);
+
                 return solution;
+
             } else if (bestNeighbour.getValue() == currentNode.getValue()) {
-                if (flatCounter == 100) {
-                    System.out.println(currentNode.getState().to_String());
+
+                if (flatCounter == 0) {
+
                     solution.finalState = currentNode.getState();
                     solution.value = problem.calculateValue(solution.finalState);
+                    solution.setBestPath(currentNode);
                     return solution;
+
                 } else {
                     flatCounter++;
                     solution.numberOfExpanedNodes++;
-
+                    LocalNode parent = new LocalNode(currentNode.getState());
+                    parent.setParent(currentNode.getParent());
+                    bestNeighbour.setParent(parent);
                     currentNode = bestNeighbour;
                 }
             } else {
                 flatCounter = 0;
+                solution.numberOfExpanedNodes++;
+                LocalNode parent = new LocalNode(currentNode.getState());
+                parent.setParent(currentNode.getParent());
+                bestNeighbour.setParent(parent);
+
                 currentNode = bestNeighbour;
             }
         }

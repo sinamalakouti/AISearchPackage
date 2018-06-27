@@ -27,33 +27,42 @@ public class FirstChoiceHillClimbing extends LocalSearchAlgorithm implements Age
         LocalNode currentNode = new LocalNode(start);
         currentNode.setValue(problem.calculateValue(start));
         while (true) {
+
+
             LocalNode neighbour = problem.getFirstBetterNeighbour(currentNode);
+
             if (neighbour == null)
                 return  null;
             solution.numberOfVisitedNodes ++;
 
             LocalNode bestNeighbour = neighbour;
-            if (bestNeighbour.getValue() > currentNode.getValue()) {
-                System.out.println(currentNode.getState().to_String());
-                System.out.println(currentNode.getValue());
+            if (bestNeighbour.getValue() < currentNode.getValue()) {
+
                 solution.finalState = currentNode.getState();
+                solution.setBestPath(currentNode);
                 solution.value = problem.calculateValue(solution.finalState);
                 return solution;
             } else if (bestNeighbour.getValue() == currentNode.getValue()) {
-                if (flatCounter == 100) {
-                    System.out.println(currentNode.getState().to_String());
+                if (flatCounter == 0) {
                     solution.finalState = currentNode.getState();
                     solution.value = problem.calculateValue(solution.finalState);
-                    System.out.println(currentNode.getValue());
+                    solution.setBestPath(currentNode);
                     return solution;
                 } else {
-                    flatCounter++;
-                    solution.numberOfExpanedNodes++;
+                        flatCounter++;
+                        solution.numberOfExpanedNodes++;
+                    LocalNode parent = new LocalNode(currentNode.getState());
+                    parent.setParent(currentNode.getParent());
+                    bestNeighbour.setParent(parent);
 
                     currentNode = bestNeighbour;
                 }
             } else {
                 flatCounter = 0;
+                solution.numberOfExpanedNodes++;
+                LocalNode parent = new LocalNode(currentNode.getState());
+                parent.setParent(currentNode.getParent());
+                bestNeighbour.setParent(parent);
                 currentNode = bestNeighbour;
             }
         }

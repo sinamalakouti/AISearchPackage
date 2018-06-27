@@ -53,25 +53,35 @@ public class StochasticHillClimbing extends LocalSearchAlgorithm implements Agen
 
 
 
-            if (bestNeighbour.getValue() > currentNode.getValue()) {
-                System.out.println(currentNode.getState().to_String());
+            if (bestNeighbour.getValue() < currentNode.getValue()) {
                 solution.finalState = currentNode.getState();
+                solution.setBestPath(currentNode);
                 solution.value = problem.calculateValue(solution.finalState);
                 return solution;
             } else if (bestNeighbour.getValue() == currentNode.getValue()) {
-                if (flatCounter == 100) {
-                    System.out.println(currentNode.getState().to_String());
+                if (flatCounter == 1000) {
                     solution.finalState = currentNode.getState();
+                    solution.setBestPath(currentNode);
                     solution.value = problem.calculateValue(solution.finalState);
                     return solution;
                 } else {
                     flatCounter++;
                     solution.numberOfExpanedNodes++;
+                    LocalNode parent = new LocalNode(currentNode.getState());
+                    parent.setParent(currentNode.getParent());
+
+                    bestNeighbour.setParent(parent);
+
 
                     currentNode = bestNeighbour;
                 }
             } else {
                 flatCounter = 0;
+                solution.numberOfExpanedNodes++;
+                LocalNode parent = new LocalNode(currentNode.getState());
+                parent.setParent(currentNode.getParent());
+                bestNeighbour.setParent(parent);
+
                 currentNode = bestNeighbour;
             }
         }

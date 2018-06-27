@@ -118,22 +118,24 @@ public class Main {
 
 
         GraphColoring graphColoring = new GraphColoring(matrix,4,3);
-        FirstChoiceHillClimbing hillClimbing = new FirstChoiceHillClimbing();
-//       MainSolution sol =  hillClimbing.solve(graphColoring,graphColoring.getInitialState());
-////        System.out.println(sol);
+        RandomStartHC hillClimbing = new RandomStartHC();
+//       Solution sol = (Solution) hillClimbing.solve(graphColoring,graphColoring.getInitialState());
+//        System.out.println(sol.to_strString_HilClimbing());
 
 //        wordTable problem
 
-//        ArrayList<String> dictionary = new ArrayList<>();
-//        dictionary.add("cool");
-//        dictionary.add("cat");
-//        dictionary.add("talk");
-//        dictionary.add("go");
-//
-//        wordTable wordTable = new wordTable(dictionary,4,3);
-//        SimulatedAnnealing simulatedAnnealing =new SimulatedAnnealing();
-//      MainSolution sol =   simulatedAnnealing.solve(wordTable,wordTable.getInitialState());
-//        System.out.println(sol);
+        ArrayList<String> dictionary = new ArrayList<>();
+        dictionary.add("cool");
+        dictionary.add("cat");
+        dictionary.add("talk");
+        dictionary.add("go");
+
+        wordTable wordTable = new wordTable(dictionary,4,3);
+        SimulatedAnnealing simulatedAnnealing =new SimulatedAnnealing();
+//      Solution sol = (Solution) simulatedAnnealing.solve(wordTable,wordTable.getInitialState());
+
+//        System.out.println(sol.to_strString_HilClimbing());
+
 //        System.out.println(sol);
 //        System.out.println(((Solution)sol).finalState);
 //        System.out.println(        wordTable.calculateValue(((Solution)sol).finalState));
@@ -155,10 +157,9 @@ public class Main {
         Keyboard key = new Keyboard();
         Genetic gen = new Genetic(20,1000,0.2d);
         Solution sol = (Solution) gen.solve(key,key.getInitialState());
-
-
-
         System.out.println(sol.finalState.to_String());
+
+        gen.drawGraph(0,gen.storedComptenecis);
     }
 // path is :( 0, 0 ) -> ( 1, 0 ) -> ( 2, 0 ) -> ( 3, 0 ) -> ( 3, 1 ) -> ( 4, 1 ) -> ( 4, 2 ) -> ( 4, 3 ) -> ( 4, 4 )
 

@@ -19,7 +19,7 @@ public class RandomStartHC extends LocalSearchAlgorithm implements Agent{
 
         MainSolution sol = null;
 
-        while ( sol == null ||  ((Solution)sol).value != 0 ){
+        while ( sol == null ||  ((Solution)sol).value != 4 ){
 
             HillClimbing hc = new HillClimbing();
             sol = hc.solve(problem,((Problem)problem).getInitialState());
